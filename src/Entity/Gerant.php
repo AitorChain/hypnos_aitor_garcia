@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GerantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -29,6 +31,14 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 50)]
     private $prenom;
+
+    #[ORM\OneToMany(mappedBy: 'gerant', targetEntity: Etablissement::class)]
+    private $etablissements;
+
+    public function __construct()
+    {
+        $this->etablissements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +130,36 @@ class Gerant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etablissement>
+     */
+    public function getEtablissements(): Collection
+    {
+        return $this->etablissements;
+    }
+
+    public function addEtablissement(Etablissement $etablissement): self
+    {
+        if (!$this->etablissements->contains($etablissement)) {
+            $this->etablissements[] = $etablissement;
+            $etablissement->setGerant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEtablissement(Etablissement $etablissement): self
+    {
+        if ($this->etablissements->removeElement($etablissement)) {
+            // set the owning side to null (unless already changed)
+            if ($etablissement->getGerant() === $this) {
+                $etablissement->setGerant(null);
+            }
+        }
 
         return $this;
     }

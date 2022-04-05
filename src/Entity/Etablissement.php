@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EtablissementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EtablissementRepository::class)]
@@ -24,6 +26,17 @@ class Etablissement
 
     #[ORM\Column(type: 'text')]
     private $description;
+
+    #[ORM\OneToMany(mappedBy: 'etablissement', targetEntity: Suite::class, orphanRemoval: true)]
+    private $suites;
+
+    #[ORM\ManyToOne(targetEntity: Gerant::class, inversedBy: 'etablissements')]
+    private $gerant;
+
+    public function __construct()
+    {
+        $this->suites = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +87,48 @@ class Etablissement
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Suite>
+     */
+    public function getSuites(): Collection
+    {
+        return $this->suites;
+    }
+
+    public function addSuite(Suite $suite): self
+    {
+        if (!$this->suites->contains($suite)) {
+            $this->suites[] = $suite;
+            $suite->setEtablissement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSuite(Suite $suite): self
+    {
+        if ($this->suites->removeElement($suite)) {
+            // set the owning side to null (unless already changed)
+            if ($suite->getEtablissement() === $this) {
+                $suite->setEtablissement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getGerant(): ?Gerant
+    {
+        return $this->gerant;
+    }
+
+    public function setGerant(?Gerant $gerant): self
+    {
+        $this->gerant = $gerant;
 
         return $this;
     }

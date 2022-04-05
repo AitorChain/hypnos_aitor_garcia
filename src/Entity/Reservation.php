@@ -19,6 +19,17 @@ class Reservation
     #[ORM\Column(type: 'date')]
     private $checkOut;
 
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $createdAt;
+
+    #[ORM\ManyToOne(targetEntity: Suite::class, inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $suite;
+
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +55,42 @@ class Reservation
     public function setCheckOut(\DateTimeInterface $checkOut): self
     {
         $this->checkOut = $checkOut;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getSuite(): ?Suite
+    {
+        return $this->suite;
+    }
+
+    public function setSuite(?Suite $suite): self
+    {
+        $this->suite = $suite;
+
+        return $this;
+    }
+
+    public function getClient(): ?Utilisateur
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Utilisateur $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
