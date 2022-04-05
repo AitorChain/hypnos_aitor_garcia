@@ -30,8 +30,10 @@ class Etablissement
     #[ORM\OneToMany(mappedBy: 'etablissement', targetEntity: Suite::class, orphanRemoval: true)]
     private $suites;
 
-    #[ORM\ManyToOne(targetEntity: Gerant::class, inversedBy: 'etablissements')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
+    #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'etablissements')]
     private $gerant;
+
 
     public function __construct()
     {
@@ -121,15 +123,16 @@ class Etablissement
         return $this;
     }
 
-    public function getGerant(): ?Gerant
+    public function getGerant(): ?Utilisateur
     {
         return $this->gerant;
     }
 
-    public function setGerant(?Gerant $gerant): self
+    public function setGerant(?Utilisateur $gerant): self
     {
         $this->gerant = $gerant;
 
         return $this;
     }
+
 }
