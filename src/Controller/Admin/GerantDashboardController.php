@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Etablissement;
+use App\Entity\Suite;
 use App\Entity\Utilisateur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -12,14 +13,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminDashboardController extends AbstractDashboardController
+class GerantDashboardController extends AbstractDashboardController
 {
-    #[Route('/administration', name: 'admin')]
+    #[Route('/gerance', name: 'gerance')]
     public function index(): Response
     {
 
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect($adminUrlGenerator->setController(EtablissementCrudController::class)->generateUrl());
 
@@ -43,21 +42,12 @@ class AdminDashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-
-        yield MenuItem::subMenu('Hôtels', 'fas fa-hotel')->setSubItems([
-            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Etablissement::class)
+        yield MenuItem::linkToCrud('Hôtels', 'fas fa-hotel', Etablissement::class);
+        yield MenuItem::subMenu('Suites', 'fas fa-bed')->setSubItems([
+            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Suite::class)
                 ->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Voir liste', 'fas fa-eye', Etablissement::class)
+            MenuItem::linkToCrud('Voir liste', 'fas fa-eye', Suite::class)
                 ->setAction(Crud::PAGE_INDEX)
         ]);
-
-        yield MenuItem::subMenu('Gérants', 'fas fa-user')->setSubItems([
-            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Utilisateur::class)
-                ->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Voir liste', 'fas fa-eye', Utilisateur::class)
-                ->setAction(Crud::PAGE_INDEX)
-            ]);
-
     }
 }
