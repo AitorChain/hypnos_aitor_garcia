@@ -40,6 +40,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'gerant', targetEntity: Etablissement::class)]
     private $etablissements;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $isGerant;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -204,4 +207,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getIsGerant(): ?bool
+    {
+        return $this->isGerant;
+    }
+
+    public function setIsGerant(?bool $isGerant): self
+    {
+        $this->isGerant = $isGerant;
+
+        return $this;
+    }
+
 }

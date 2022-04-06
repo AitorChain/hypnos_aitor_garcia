@@ -7,6 +7,7 @@ security:
             algorithm: auto
 
 
+
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -14,7 +15,7 @@ security:
             entity:
                 class: App\Entity\Utilisateur
                 property: email
-        # used to reload user from session & other features (e.g. switch_user)
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -37,8 +38,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        #- { path: ^/admin, roles: ['ROLE_ADMIN', 'ROLE_GERANT'] }
-        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ['ROLE_ADMIN', 'ROLE_GERANT'] }
+        - { path: ^/profile, roles: ROLE_CLIENT }
 
 when@test:
     security:

@@ -30,7 +30,7 @@ class Etablissement
     #[ORM\OneToMany(mappedBy: 'etablissement', targetEntity: Suite::class, orphanRemoval: true)]
     private $suites;
 
-    #[ORM\JoinColumn(onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(onDelete: "SET NULL")]
     #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'etablissements')]
     private $gerant;
 

@@ -2,9 +2,14 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Etablissement;
+use App\Entity\Gerant;
+use App\Entity\Reservation;
 use App\Entity\Suite;
 use App\Entity\Utilisateur;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\SubMenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -44,7 +49,25 @@ class AdminDashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Suites', 'fas fa-list', Suite::class);
-        yield MenuItem::linkToCrud('Users', 'fas fa-list', Utilisateur::class);
+
+        yield MenuItem::subMenu('Etablissements', 'fas fa-hotel')->setSubItems([
+            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Etablissement::class)
+                ->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Voir liste', 'fas fa-eye', Etablissement::class)
+                ->setAction(Crud::PAGE_INDEX)
+        ])
+            ->setPermission('ROLE_ADMIN');
+
+        yield MenuItem::subMenu('Gérants', 'fas fa-user')->setSubItems([
+            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Utilisateur::class)
+                ->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('Voir liste', 'fas fa-eye', Utilisateur::class)
+                ->setAction(Crud::PAGE_INDEX)
+            ])
+            ->setPermission('ROLE_ADMIN');
+
+
+        yield MenuItem::linkToCrud('Suites', 'fas fa-list', Suite::class)
+            ->setPermission('ROLE_GERANT');
     }
 }
