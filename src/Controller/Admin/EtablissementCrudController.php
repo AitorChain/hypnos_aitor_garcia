@@ -44,7 +44,7 @@ class EtablissementCrudController extends AbstractCrudController
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
-
+        //Forces the Gerant to only see in the Index the etablissements which he owns.
         if ($this->isGranted('ROLE_GERANT')){
             return parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters)
                 ->where('entity.gerant = :gerant')
@@ -78,7 +78,7 @@ class EtablissementCrudController extends AbstractCrudController
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        //Makes impossible for the Gerant to delete and hotel entity
+        //Makes impossible for the Gerant to delete an hotel entity
         if ($this->isGranted('ROLE_ADMIN')){
             parent::deleteEntity($entityManager, $entityInstance);
         }

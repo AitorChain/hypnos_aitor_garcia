@@ -39,6 +39,11 @@ class Suite
         $this->reservations = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->titre;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
