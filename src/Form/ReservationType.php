@@ -27,28 +27,23 @@ class ReservationType extends AbstractType
                 'mapped' => false
             ])
             ->add('checkIn', DateType::class, [
-                'widget' => 'choice',
-                'format' => 'dd-MMM-y',
+                'widget' => 'single_text',
                 'by_reference' => true,
                 'mapped' => true,
                 'required' => true,
                 'placeholder' => [
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                 ],
-                'years' => range(date("Y"), date("Y") + 2) ,
             ])
             ->add('checkOut', DateType::class, [
-                'widget' => 'choice',
-                'format' => 'dd-MMM-y',
+                'widget' => 'single_text',
                 'by_reference' => true,
                 'mapped' => true,
                 'required' => true,
                 'placeholder' => [
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                 ],
-                'years' => range(date("Y"), date("Y") + 2) ,
             ])
-
         ;
 
         $builder->get('etablissement')->addEventListener(

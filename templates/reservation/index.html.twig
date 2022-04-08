@@ -8,7 +8,13 @@
         {{ form_row(form.etablissement) }}
         {{ form_row(form.suite) }}
         {{ form_rest(form) }}
-        <input type="submit"/>
+        {% if is_granted('ROLE_USER') %}
+            <button type="submit" id="submit_reservation">Réserver</button>
+        {% else %}
+            <span>Connectez-vous pour résérver</span>
+            <a href="{{ path('app_login') }}">Se connecter</a>
+            <a href="{{ path('app_register') }}">Creer une compte</a>
+        {% endif %}
     {{ form_end(form) }}
 
 {% endblock %}
