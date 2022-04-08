@@ -5,6 +5,9 @@
 {% block body %}
 
     {{ form_start(form) }}
+        {{ form_row(form.etablissement) }}
+        {{ form_row(form.suite) }}
+        {{ form_rest(form) }}
         <input type="submit"/>
     {{ form_end(form) }}
 

@@ -28,17 +28,25 @@ class ReservationType extends AbstractType
             ])
             ->add('checkIn', DateType::class, [
                 'widget' => 'choice',
-                'format' => 'd-M-y',
+                'format' => 'dd-MMM-y',
                 'by_reference' => true,
                 'mapped' => true,
                 'required' => true,
+                'placeholder' => [
+                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                ],
+                'years' => range(date("Y"), date("Y") + 2) ,
             ])
             ->add('checkOut', DateType::class, [
                 'widget' => 'choice',
-                'format' => 'd-M-y',
+                'format' => 'dd-MMM-y',
                 'by_reference' => true,
                 'mapped' => true,
                 'required' => true,
+                'placeholder' => [
+                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                ],
+                'years' => range(date("Y"), date("Y") + 2) ,
             ])
 
         ;

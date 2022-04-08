@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReservationRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
@@ -103,6 +104,18 @@ class Reservation
         $this->client = $client;
 
         return $this;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        if ($this->getCheckIn() >= $this->getCheckOut()){
+            $context->buildViolation('La date de check out doit être au moins un jours après celle du check in')
+                ->atPath('checkOut')
+                ->addViolation();
+        }
     }
 
 }
