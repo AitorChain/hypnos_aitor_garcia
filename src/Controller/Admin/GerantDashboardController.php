@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Etablissement;
+use App\Entity\Reservation;
 use App\Entity\Suite;
 use App\Entity\Utilisateur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -49,5 +50,6 @@ class GerantDashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Voir liste', 'fas fa-eye', Suite::class)
                 ->setAction(Crud::PAGE_INDEX)
         ]);
+        yield MenuItem::linkToCrud('Reservations', 'fas fa-key', Reservation::class);
     }
 }

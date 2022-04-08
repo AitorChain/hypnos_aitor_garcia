@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Suite;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -22,7 +23,6 @@ class SuiteCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-
         yield AssociationField::new('etablissement')
             ->setQueryBuilder(function (QueryBuilder $queryBuilder){
                $queryBuilder
@@ -33,5 +33,16 @@ class SuiteCrudController extends AbstractCrudController
         yield TextareaField::new('description');
         yield MoneyField::new('prix')->setCurrency('EUR');
         yield TextField::new('lien_booking');
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            // ...
+            ->setPermission(Action::NEW, 'ROLE_GERANT')
+            ->setPermission(Action::DELETE, 'ROLE_GERANT')
+            ->setPermission(Action::EDIT, 'ROLE_GERANT')
+            ->setPermission(Action::DETAIL, 'ROLE_GERANT')
+            ;
     }
 }

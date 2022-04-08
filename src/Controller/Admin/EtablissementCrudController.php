@@ -39,6 +39,7 @@ class EtablissementCrudController extends AbstractCrudController
             ->setPermission(Action::NEW, 'ROLE_ADMIN')
             ->setPermission(Action::DELETE, 'ROLE_ADMIN')
             ->setPermission(Action::EDIT, 'ROLE_ADMIN')
+            ->setPermission(Action::DETAIL, 'ROLE_ADMIN')
             ;
     }
 
@@ -57,7 +58,6 @@ class EtablissementCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-
         yield TextField::new('nom');
         yield TextField::new('ville');
         yield TextField::new('addrese');

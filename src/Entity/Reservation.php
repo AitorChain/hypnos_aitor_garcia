@@ -37,7 +37,7 @@ class Reservation
 
     public function __toString()
     {
-        return $this->suite.' '.$this->client;
+        return rand(0, 50000).' '.$this->suite.' '.$this->client;
     }
 
 

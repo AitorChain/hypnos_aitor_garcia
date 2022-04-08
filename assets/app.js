@@ -12,15 +12,14 @@ import './styles/app.css';
 import './bootstrap';
 
 //This script makes possible to load the suites of each etablissement without reloading the page
-var $reservation_etablissement = $("#reservation_etablissement")
-var $token = $("#reservation__token")
+const $reservation_etablissement = $("#reservation_etablissement")
+
 
 $reservation_etablissement.change(function()
 {
-    var $form = $(this).closest('form')
-    var data = {}
+    let $form = $(this).closest('form')
+    let data = {}
     data[$reservation_etablissement.attr('name')] = $reservation_etablissement.val()
-    data[$token.attr('name')] = $token.val()
 
     $.post($form.attr('action'), data).then(function(response)
     {
@@ -29,4 +28,46 @@ $reservation_etablissement.change(function()
         )
     })
 })
-////////////////////////////////////
+
+// Here I check if there's availability for the room selected, it works like this: First we add the 'check_availability' class
+// to the suite, checkIn, and checkOut fields of the form. Then we uses the change event in them and, if they all have values,
+// we send a request to the /reservation/check_availability route and we receive the availability
+
+$('#reservation_suite, #reservation_checkIn, #reservation_checkOut').addClass('check_availability')
+const $check_availability = $('.check_availability')
+
+$check_availability.change(function(){
+
+    let $suite = $('#reservation_suite').val()
+    let $checkIn= $('#reservation_checkIn').val()
+    let $checkOut= $('#reservation_checkOut').val()
+
+    if ($suite && $checkIn && $checkOut) {
+        let data={};
+        data['suite'] = $suite;
+        data['checkIn'] = $checkIn;
+        data['checkOut'] = $checkOut;
+
+        $.ajax({
+            type: 'POST',
+            url: '/reservation/check_availability',
+            data: data,
+            error: function(){
+                console.log('error')
+            },
+            success: function(data){
+                console.log(data)
+                if(data.status === 'error'){
+                    console.log('La suite n\'est pas disponible, choissisez une autre date')
+                    $("#submit_reservation").attr('disabled', true)
+
+                }else{
+                    console.log('La suite est disponible')
+                    $("#submit_reservation").attr('disabled', false)
+                }
+            }
+        })
+    }
+
+})
+

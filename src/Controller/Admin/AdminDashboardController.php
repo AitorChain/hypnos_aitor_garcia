@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Etablissement;
+use App\Entity\Reservation;
 use App\Entity\Utilisateur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
