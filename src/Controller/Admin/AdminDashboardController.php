@@ -46,6 +46,8 @@ class AdminDashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
+        yield MenuItem::linkToCrud('Reservations', 'fas fa-message', Reservation::class);
+
         yield MenuItem::subMenu('Hôtels', 'fas fa-hotel')->setSubItems([
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Etablissement::class)
                 ->setAction(Crud::PAGE_NEW),
