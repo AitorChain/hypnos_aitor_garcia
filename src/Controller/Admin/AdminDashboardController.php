@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Demande;
 use App\Entity\Etablissement;
 use App\Entity\Reservation;
 use App\Entity\Utilisateur;
@@ -46,8 +47,6 @@ class AdminDashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
-        yield MenuItem::linkToCrud('Reservations', 'fas fa-message', Reservation::class);
-
         yield MenuItem::subMenu('Hôtels', 'fas fa-hotel')->setSubItems([
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Etablissement::class)
                 ->setAction(Crud::PAGE_NEW),
@@ -61,6 +60,8 @@ class AdminDashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Voir liste', 'fas fa-eye', Utilisateur::class)
                 ->setAction(Crud::PAGE_INDEX)
             ]);
+
+        yield MenuItem::linkToCrud('Demandes', 'fas fa-envelope', Demande::class);
 
     }
 }

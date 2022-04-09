@@ -3,12 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Suite;
+use App\Form\GallerieType;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -33,6 +36,16 @@ class SuiteCrudController extends AbstractCrudController
         yield TextareaField::new('description');
         yield MoneyField::new('prix')->setCurrency('EUR');
         yield TextField::new('lien_booking');
+        yield ImageField::new('photoFilename')
+            ->setBasePath('/uploads/images')
+            ->setUploadDir('/public/uploads/images')
+            ->setLabel('Background photo')
+        ;
+        yield CollectionField::new('gallerieImages')
+            ->setLabel('')
+            ->setEntryType(GallerieType::class)
+            ->setFormTypeOption('by_reference', false)
+            ->onlyOnForms();
     }
 
     public function configureActions(Actions $actions): Actions

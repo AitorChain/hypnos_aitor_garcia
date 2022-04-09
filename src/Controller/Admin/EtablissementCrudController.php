@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -72,6 +73,11 @@ class EtablissementCrudController extends AbstractCrudController
             ->setPermission('ROLE_ADMIN');
         yield TextareaField::new('description')
         ->hideOnIndex();
+        yield ImageField::new('photoFilename')
+            ->setBasePath('/uploads/images')
+            ->setUploadDir('/public/uploads/images')
+            ->setLabel('Photo')
+        ;
         yield AssociationField::new('suites', 'Nombre de suites')
         ->hideOnForm();
     }

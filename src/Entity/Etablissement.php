@@ -6,6 +6,7 @@ use App\Repository\EtablissementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: EtablissementRepository::class)]
 class Etablissement
@@ -33,6 +34,13 @@ class Etablissement
     #[ORM\JoinColumn(onDelete: "SET NULL")]
     #[ORM\ManyToOne(targetEntity: Utilisateur::class, inversedBy: 'etablissements')]
     private $gerant;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $photoFilename;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Gedmo\Slug(fields: ['nom', 'ville'])]
+    private $slug;
 
 
     public function __construct()
@@ -136,6 +144,30 @@ class Etablissement
     public function setGerant(?Utilisateur $gerant): self
     {
         $this->gerant = $gerant;
+
+        return $this;
+    }
+
+    public function getPhotoFilename(): ?string
+    {
+        return $this->photoFilename;
+    }
+
+    public function setPhotoFilename(?string $photoFilename): self
+    {
+        $this->photoFilename = $photoFilename;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

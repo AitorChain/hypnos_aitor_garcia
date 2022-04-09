@@ -46,7 +46,7 @@ class UtilisateurCrudController extends AbstractCrudController
         yield TextField::new('nom')->setLabel('Nom');
         yield EmailField::new('email')->setLabel('Email');
         yield TextField::new('password')->setLabel('Mot de Passe')
-            ->hideOnIndex();
+            ->onlyOnForms();
         yield AssociationField::new('etablissements')
             //Changes the display in the index page from numbers to lists
             ->formatValue(function ($value, $entity){

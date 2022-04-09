@@ -34,9 +34,16 @@ class Suite
     #[ORM\OneToMany(mappedBy: 'suite', targetEntity: Reservation::class, orphanRemoval: true)]
     private $reservations;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $photoFilename;
+
+    #[ORM\OneToMany(mappedBy: 'suite', targetEntity: GallerieImage::class, cascade: ['persist'], orphanRemoval: true)]
+    private $gallerieImages;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+        $this->gallerieImages = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -133,6 +140,48 @@ class Suite
             // set the owning side to null (unless already changed)
             if ($reservation->getSuite() === $this) {
                 $reservation->setSuite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPhotoFilename(): ?string
+    {
+        return $this->photoFilename;
+    }
+
+    public function setPhotoFilename(?string $photoFilename): self
+    {
+        $this->photoFilename = $photoFilename;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GallerieImage>
+     */
+    public function getGallerieImages(): Collection
+    {
+        return $this->gallerieImages;
+    }
+
+    public function addGallerieImage(GallerieImage $gallerieImage): self
+    {
+        if (!$this->gallerieImages->contains($gallerieImage)) {
+            $this->gallerieImages[] = $gallerieImage;
+            $gallerieImage->setSuite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGallerieImage(GallerieImage $gallerieImage): self
+    {
+        if ($this->gallerieImages->removeElement($gallerieImage)) {
+            // set the owning side to null (unless already changed)
+            if ($gallerieImage->getSuite() === $this) {
+                $gallerieImage->setSuite(null);
             }
         }
 
