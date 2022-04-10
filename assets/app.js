@@ -11,16 +11,44 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 
+
 //This script makes possible to load the suites of each etablissement without reloading the page
 const $reservation_etablissement = $("#reservation_etablissement")
+const urlParams = new URLSearchParams(window.location.search)
 
+const etablissementQuery = urlParams.get('etablissement')
+const suiteQuery = urlParams.get('suite')
 
-$reservation_etablissement.change(function()
-{
-    let $form = $(this).closest('form')
+console.log(etablissementQuery)
+console.log(suiteQuery)
+
+//$reservation_etablissement.val(etablissementQuery);
+//$reservation_suite.val(suiteQuery);
+
+$reservation_etablissement.find('option[value="' + etablissementQuery + '"]').attr("selected", "selected")
+
+$(window).ready(function () {
+    let $form = $('#reservation')
     let data = {}
     data[$reservation_etablissement.attr('name')] = $reservation_etablissement.val()
 
+
+    $.post($form.attr('action'), data).then(function (response) {
+        $("#reservation_suite").replaceWith(
+            $(response).find("#reservation_suite")
+        )
+        $("#reservation_suite").find('option[value="' + suiteQuery + '"]').attr("selected", "selected")
+    })
+
+})
+
+//This script makes possible to load the suites of each etablissement without reloading the page
+
+$reservation_etablissement.on('change', function()
+{
+    let $form = $('#reservation')
+    let data = {}
+    data[$reservation_etablissement.attr('name')] = $reservation_etablissement.val()
     $.post($form.attr('action'), data).then(function(response)
     {
         $("#reservation_suite").replaceWith(

@@ -11,7 +11,6 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @method Etablissement|null find($id, $lockMode = null, $lockVersion = null)
  * @method Etablissement|null findOneBy(array $criteria, array $orderBy = null)
- * @method Etablissement[]    findAll()
  * @method Etablissement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class EtablissementRepository extends ServiceEntityRepository
@@ -43,6 +42,11 @@ class EtablissementRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findAll()
+    {
+        return $this->findBy([],['nom' => 'ASC','ville' => 'ASC']);
     }
 
     // /**

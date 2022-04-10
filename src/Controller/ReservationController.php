@@ -21,6 +21,7 @@ class ReservationController extends AbstractController
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hotel {{ etablissement }}{% endblock %}
+
+{% block body %}
+
+    <h1>Hotel {{ etablissement }}</h1>
+
+    {% if suites|length > 0 %}
+
+        {% for suite in suites %}
+
+            {% if suite.photoFilename %}
+                <img src="{{ asset('uploads/images/' ~ suite.photoFilename) }}" />
+            {% endif %}
+
+            <h4>{{ suite.titre }}</h4>
+            <p>{{ suite.description }}</p>
+            <p>{{ suite.prix }}</p>
+            <a href="/{{ suite.lienBooking|url_encode }}">Reserver en booking.com</a>
+            <a href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">Reserver</a>
+
+        {% endfor %}
+
+    {% else %}
+        <div>Cet hotel n'a pas de suites disponibles</div>
+    {% endif %}
+
+{% endblock %}

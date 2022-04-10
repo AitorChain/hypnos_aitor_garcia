@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Groupe Hypnos{% endblock %}
+
+{% block body %}
+    {% for etablissement in etablissements  %}
+
+        <h4>{{ etablissement }}</h4>
+        <h5>{{ etablissement.ville }}</h5>
+        <h6>{{ etablissement.description }}</h6>
+        <a href="{{ path('app_hotel', {slug: etablissement.slug}) }}">View more</a>
+
+    {% endfor %}
+
+{% endblock %}

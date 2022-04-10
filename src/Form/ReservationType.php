@@ -24,7 +24,8 @@ class ReservationType extends AbstractType
             ->add('etablissement', EntityType::class, [
                 'class' => Etablissement::class,
                 'placeholder' => 'Choisissez un etablissement',
-                'mapped' => false
+                'mapped' => false,
+
             ])
             ->add('checkIn', DateType::class, [
                 'widget' => 'single_text',
@@ -58,13 +59,14 @@ class ReservationType extends AbstractType
                         'placeholder' => 'Choisissez une suite',
                         'choices' => $form->getData()->getSuites(),
                         'mapped' => true,
+
                     ]);
                 }
             }
         );
 
         $builder->addEventListener(
-            FormEvents::POST_SET_DATA,
+            FormEvents::PRE_SET_DATA,
             function(FormEvent $event)
             {
                 $form = $event->getForm();
@@ -80,17 +82,21 @@ class ReservationType extends AbstractType
                         'placeholder' => 'Choisissez une suite',
                         'choices' => $form->getData()->getSuites(),
                         'mapped' => true,
+
                     ]);
                 } else {
                     $form->add('suite', EntityType::class, [
                         'class' => Suite::class,
                         'placeholder' => 'Choisissez une suite',
-                        'choices' => []
+                        'choices' => [],
+
                     ]);
                 }
 
             }
         );
+
+
 
     }
 
