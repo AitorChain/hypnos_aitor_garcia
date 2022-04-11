@@ -3,13 +3,54 @@
 {% block title %}Groupe Hypnos{% endblock %}
 
 {% block body %}
-    {% for etablissement in etablissements  %}
 
-        <h4>{{ etablissement }}</h4>
-        <h5>{{ etablissement.ville }}</h5>
-        <h6>{{ etablissement.description }}</h6>
-        <a href="{{ path('app_hotel', {slug: etablissement.slug}) }}">View more</a>
+    <div class="container-fluid banner homepage-banner">
 
-    {% endfor %}
+        <section class="container">
+            <div class="row row-cols-xl-2">
+                <div class="banner-text col-xl-8 text-align-left">
+                    <h1>Decouvrez nos hôtels, profitez des vacances excepticionnelles.</h1>
+                </div>
+                <div id="carousel-hotels" class="carrousel-hotels col-xl-4 carousel slide" data-bs-ride="carousel">
+
+                    <div class="carousel-indicators">
+                        {% for etablissement in etablissements  %}
+                            <button type="button" data-bs-target="#carousel-hotels" data-bs-slide-to="{{ loop.index - 1 }}" class="active"></button>
+                        {% endfor %}
+                    </div>
+
+
+                    <div class="carousel-inner">
+                    {% for etablissement in etablissements  %}
+
+                        <div class="card carousel-item {% if loop.index == 1 %}active{% endif %}">
+                            <a href="{{ path('app_hotel', {slug: etablissement.slug}) }}">
+                            <img class="card-img-top hotel-slider-img" src="/uploads/images/{{ etablissement.photoFilename }}" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title"><strong>{{ etablissement }}</strong></h4>
+                                <h6 class="card-subtitle"><strong>{{ etablissement.ville }}</strong> - {{ etablissement.suites|length }} suites</h6>
+                                <button class="btn-secondary" href="{{ path('app_hotel', {slug: etablissement.slug}) }}">View more</button>
+                            </div>
+                            </a>
+                        </div>
+
+                    {% endfor %}
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-hotels" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-hotels" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="homepage-banner-button col text-align-center">
+                    <a class="btn-primary" href="{{ path('app_hotel_index') }}">Decouvrir nos etablissements</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
 
 {% endblock %}

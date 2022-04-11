@@ -13,18 +13,70 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
-<body>
 
-<header>
-    <h1><a href="{{ path('app_homepage') }}">HYPNOS</a></h1>
-    <ul>
-        {% for etablissement in etablissements %}
-            <li>
-                <a href="{{ path('app_hotel', { slug: etablissement.slug}) }}">{{ etablissement }}</a>
+<body>
+<header class="container-fluid header fixed-top">
+
+    <nav class="navbar container-xl navbar-expand-md ">
+        <a class="navbar-brand"  href="{{ path('app_homepage') }}">
+            <img src="{{ asset('assets/images/hypnos-logo.png') }}" class="logo"/>
+        </a>
+
+        <button
+                type="button"
+                class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                arie-expanded="false"
+                aria-label="Toggle activation"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ path('app_hotel_index') }}" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Hôtels
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        {% for etablissement in etablissements %}
+                            <li class="dropdown-item">
+                                <a class="dropdown-item" href="{{ path('app_hotel', { slug: etablissement.slug}) }}">{{ etablissement }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+            <li class="nav-item">
+                <a href="{{ path('app_contact') }}">Nous contacter</a>
             </li>
-        {% endfor %}
-    </ul>
+            <li class="nav-item">
+                <a href="{{ path('profile') }}">Espace client</a>
+            </li>
+            <button class="btn-primary" href="{{ path('app_reservation_new')}}">
+                Reserver
+            </button>
+        </div>
+    </nav>
 </header>
+
 {% block body %}{% endblock %}
+
+<footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="{{ path('app_homepage') }}" class="nav-link px-2">Page d'accueil</a></li>
+        <li class="nav-item"><a href="{{ path('app_hotel_index') }}" class="nav-link px-2">Hôtels</a></li>
+        <li class="nav-item"><a href="{{ path('app_contact') }}" class="nav-link px-2">Nous contacter</a></li>
+        <li class="nav-item"><a href="{{ path('profile') }}" class="nav-link px-2">Espace client</a></li>
+        <li class="nav-item"><a href="{{ path('app_reservation_new')}}" class="nav-link px-2">Reserver</a></li>
+    </ul>
+    <p class="text-center text-muted">&copy; 2021 Company, Inc</p>
+</footer>
+
 </body>
 </html>

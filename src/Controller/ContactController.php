@@ -15,10 +15,8 @@ use Symfony\Component\Security\Core\Security;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $token): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = $token->getToken()->getUser();
-
         $demande = new Demande();
         $form = $this->createForm(ContactType::class, $demande);
         $form->handleRequest($request);

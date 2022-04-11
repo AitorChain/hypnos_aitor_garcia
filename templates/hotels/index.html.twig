@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Groupe Hypnos{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid banner hotel-banner">
+
+        <section class="container">
+            <div class="row ">
+                <div class="banner-text text-center">
+                    <h1>Nos hôtels</h1>
+                </div>
+            </div>
+
+            <div class="row row-cols-xl-3">
+                {% for etablissement in etablissements  %}
+                <div class="cols-xl-4 card-container">
+                    <div class="card">
+                        <a href="{{ path('app_hotel', {slug: etablissement.slug}) }}">
+                            <img class="card-img-top hotel-slider-img" src="/uploads/images/{{ etablissement.photoFilename }}" alt="">
+                            <div class="card-body">
+                                <h4 class="card-title"><strong>{{ etablissement }}</strong></h4>
+                                <h6 class="card-subtitle"><strong>{{ etablissement.ville }}</strong> - {{ etablissement.suites|length }} suites</h6>
+                                <a class="btn-secondary" href="{{ path('app_hotel', {slug: etablissement.slug}) }}">View more</a>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </section>
+
+    </div>
+
+{% endblock %}

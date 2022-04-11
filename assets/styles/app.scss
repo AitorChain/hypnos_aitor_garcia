@@ -1,0 +1,98 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: white;
+  font-family: Lato;
+}
+
+header {
+  background-color: rgb(255, 255, 255);
+  height:auto;
+  box-shadow: 0 3px 10px #0000004a;
+}
+
+.logo {
+  max-width: 200px;
+}
+
+.navbar ul {
+  margin-bottom: 0;
+}
+.navbar li {
+  padding: 0 1em;
+  list-style-type: none;
+  text-align: center;
+  cursor:pointer;
+}
+
+.navbar li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.banner {
+  height: auto;
+  background-position: top center;
+  background-size: cover;
+}
+
+.homepage-banner {
+  background-image: linear-gradient(rgb(0 0 0 / 30%), rgb(0 0 0 / 77%)), url(/public/assets/images/hotel-background.jpg);
+  min-height: 100vh;
+  height: 100%;
+}
+
+.homepage-banner .banner-text h1,
+.homepage-banner .banner-text h2 {
+  font-size: 4.9em;
+}
+
+.homepage-banner-button {
+  width: auto;
+  margin: auto;
+}
+
+.banner-text h1,
+.banner-text h2 {
+  font-size: 3.8em;
+  color: #fff;
+  font-weight: 600;
+  padding-top: 2.8em;
+  padding-bottom: 2em;
+  padding-right: 0.4em;
+}
+
+.banner-text h1 strong,
+.banner-text h2 strong {
+  color: #6ed556fc;
+}
+
+.carrousel-hotels {
+  padding-top: 9em;
+  padding-bottom: 2em;
+  text-align: center;
+}
+
+.carousel-indicators {
+  bottom: 30px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  color: #0a0a0a;
+}
+
+
+.hotel-slider-img {
+  object-fit: cover;
+  height: 20em;
+}
+
+.hotel-banner {
+  background-image: linear-gradient(rgb(0 0 0 / 30%), rgb(0 0 0 / 77%)), url(/public/assets/images/hotel-background2.jpg);
+  min-height: 100vh;
+  height: 100%;
+
+}
