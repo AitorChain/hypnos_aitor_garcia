@@ -17,7 +17,7 @@
 <body>
 <header class="container-fluid header fixed-top">
 
-    <nav class="navbar container-xl navbar-expand-md ">
+    <nav class="navbar container-xl navbar-expand-xl ">
         <a class="navbar-brand"  href="{{ path('app_homepage') }}">
             <img src="{{ asset('assets/images/hypnos-logo.png') }}" class="logo"/>
         </a>
@@ -55,10 +55,24 @@
             <li class="nav-item">
                 <a href="{{ path('app_contact') }}">Nous contacter</a>
             </li>
-            <li class="nav-item">
-                <a href="{{ path('profile') }}">Espace client</a>
-            </li>
-            <button class="btn-primary" href="{{ path('app_reservation_new')}}">
+            {% if is_granted('ROLE_CLIENT') %}
+                <li class="nav-item">
+                    <a href="{{ path('profile') }}">Espace client</a>
+                </li>
+            {% elseif is_granted('ROLE_GERANT') %}
+                <li class="nav-item">
+                    <a href="{{ path('gerance') }}">Gérance</a>
+                </li>
+            {% elseif is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a href="{{ path('admin') }}">Administration</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{{ path('app_register') }}">Créer une compte</a>
+                </li>
+            {% endif %}
+            <button class="btn-primary btn-nav" href="{{ path('app_reservation_new')}}">
                 Reserver
             </button>
         </div>
@@ -72,7 +86,15 @@
         <li class="nav-item"><a href="{{ path('app_homepage') }}" class="nav-link px-2">Page d'accueil</a></li>
         <li class="nav-item"><a href="{{ path('app_hotel_index') }}" class="nav-link px-2">Hôtels</a></li>
         <li class="nav-item"><a href="{{ path('app_contact') }}" class="nav-link px-2">Nous contacter</a></li>
-        <li class="nav-item"><a href="{{ path('profile') }}" class="nav-link px-2">Espace client</a></li>
+        {% if is_granted('ROLE_CLIENT') %}
+            <li class="nav-item"><a href="{{ path('profile') }}" class="nav-link px-2">Espace client</a></li>
+        {% elseif is_granted('ROLE_GERANT') %}
+            <li class="nav-item"><a href="{{ path('gerance') }}" class="nav-link px-2">Gérance</a></li>
+        {% elseif is_granted('ROLE_ADMIN') %}
+            <li class="nav-item"><a href="{{ path('admin') }}" class="nav-link px-2">Administration</a></li>
+        {% else %}
+            <li class="nav-item"><a href="{{ path('app_register') }}" class="nav-link px-2">Créer une compte</a></li>
+        {% endif %}
         <li class="nav-item"><a href="{{ path('app_reservation_new')}}" class="nav-link px-2">Reserver</a></li>
     </ul>
     <p class="text-center text-muted">&copy; 2021 Company, Inc</p>

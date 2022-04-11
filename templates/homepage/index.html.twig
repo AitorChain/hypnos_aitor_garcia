@@ -11,7 +11,7 @@
                 <div class="banner-text col-xl-8 text-align-left">
                     <h1>Decouvrez nos hôtels, profitez des vacances excepticionnelles.</h1>
                 </div>
-                <div id="carousel-hotels" class="carrousel-hotels col-xl-4 carousel slide" data-bs-ride="carousel">
+                <div id="carousel-hotels" class="carrousel-hotels col-xl-4 text-center carousel slide carousel-fade" data-bs-ride="carousel">
 
                     <div class="carousel-indicators">
                         {% for etablissement in etablissements  %}
@@ -27,7 +27,7 @@
                             <a href="{{ path('app_hotel', {slug: etablissement.slug}) }}">
                             <img class="card-img-top hotel-slider-img" src="/uploads/images/{{ etablissement.photoFilename }}" alt="">
                             <div class="card-body">
-                                <h4 class="card-title"><strong>{{ etablissement }}</strong></h4>
+                                <h4 class="card-title">{{ etablissement }}</h4>
                                 <h6 class="card-subtitle"><strong>{{ etablissement.ville }}</strong> - {{ etablissement.suites|length }} suites</h6>
                                 <button class="btn-secondary" href="{{ path('app_hotel', {slug: etablissement.slug}) }}">View more</button>
                             </div>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="homepage-banner-button col text-align-center">
-                    <a class="btn-primary" href="{{ path('app_hotel_index') }}">Decouvrir nos etablissements</a>
+                    <a class="btn-primary btn-call-action" href="{{ path('app_hotel_index') }}">Decouvrir nos etablissements</a>
                 </div>
             </div>
         </section>
