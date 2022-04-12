@@ -4,26 +4,97 @@
 
 {% block body %}
 
-    <h1>Hotel {{ etablissement }}</h1>
+    <div class="container-fluid banner hotel-banner"
+            {% if etablissement.photoFilename %}
+         style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.77)), url({{ asset('uploads/images/' ~ etablissement.photoFilename) }})"
+            {% endif %}>
+        <section class="container">
+            <div class="row">
+                <div class="col-12 banner-text text-center">
+                    <h1>{{etablissement}}</h1>
+                    <h4>{{ etablissement.addrese }} - {{ etablissement.ville }}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="hotel-description col-xl-8">
+                    <p>{{ etablissement.description }}</p>
+                </div>
+                <div id="carousel-suites" class="carrousel-suites col-xl-4 text-center carousel slide carousel-fade" data-bs-ride="carousel">
+
+                    <div class="carousel-indicators">
+                        {% for suite in suites  %}
+                            <button type="button" data-bs-target="#carousel-suites" data-bs-slide-to="{{ loop.index - 1 }}" class="{% if loop.index == 1 %}active{% endif %}">></button>
+                        {% endfor %}
+                    </div>
+
+
+                    <div class="carousel-inner">
+                        {% for suite in suites  %}
+
+                            <div class="card carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                {% if suite.photoFilename is not null %}
+                                    <img class="card-img-top" src="/uploads/images/{{ suite.photoFilename }}" alt="">
+                                {% else %}
+                                    <img class="card-img-top" src="/assets/images/hypnos-logo.png" style="object-fit: contain" alt="">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ suite }}</h4>
+                                    <p class="card-content">{{ suite.description|slice(0,150) ~ '...' }}</p>
+                                    <a href="#suite-{{ loop.index }}">
+                                    <button class="btn-secondary" href="#suite-{{ loop.index }}">Savoir plus</button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-suites" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-suites" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="banner-button col text-center">
+                <a class="btn-primary btn-call-action" href="#list-suites">Decouvrir les suites</a>
+            </div>
+        </section>
+    </div>
 
     {% if suites|length > 0 %}
 
-        {% for suite in suites %}
+    <main class="container-xl list-suites" id="list-suites">
 
-            {% if suite.photoFilename %}
-                <img src="{{ asset('uploads/images/' ~ suite.photoFilename) }}" />
-            {% endif %}
+        <h2 class="title">Nos suites</h2>
 
-            <h4>{{ suite.titre }}</h4>
-            <p>{{ suite.description }}</p>
-            <p>{{ suite.prix }}</p>
-            <a href="/{{ suite.lienBooking|url_encode }}">Reserver en booking.com</a>
-            <a href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">Reserver</a>
+        <section class="row row-cols-xl-2 gx-5">
 
+        {% for suite in suites  %}
+            <div class="cols-xl-2 col-md-12 card-container" id="suite-{{ loop.index }}">
+                <div class="card text-center">
+                    {% if suite.photoFilename is not null %}
+                        <img class="card-img-top" src="/uploads/images/{{ suite.photoFilename }}" alt="">
+                    {% else %}
+                        <img class="card-img-top" src="/assets/images/hypnos-logo.png" style="object-fit: contain" alt="">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">{{ suite.titre }}</h4>
+                        <p class="card-content">{{ suite.description }}</p>
+                        <a href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">
+                        <button class="btn-secondary" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">Reserver</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
 
-    {% else %}
-        <div>Cet hotel n'a pas de suites disponibles</div>
+        </section>
+
+    </main>
+
     {% endif %}
 
 {% endblock %}

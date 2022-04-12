@@ -18,7 +18,7 @@ a {
 }
 
 a:hover {
-  color: #8d6d37;
+  color: #c39c5f;
 }
 
 .btn-primary,
@@ -35,6 +35,7 @@ a:hover {
   -ms-user-select: none;
   user-select: none;
   line-height: 1.5;
+  border-radius: 5px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -94,6 +95,8 @@ a:hover {
   box-shadow: none;
 }
 
+//header
+
 .logo {
   max-width: 200px;
 }
@@ -119,6 +122,8 @@ a:hover {
   margin-left: 1em;
 }
 
+//homepage
+
 .banner {
   height: auto;
   background-position: top center;
@@ -126,28 +131,49 @@ a:hover {
 }
 
 .homepage-banner {
-  background-image: linear-gradient(rgb(0 0 0 / 30%), rgb(0 0 0 / 77%)), url(/public/assets/images/hotel-background.jpg);
+  background-image: linear-gradient(rgb(0 0 0 / 40%), rgb(0 0 0 / 77%)), url(/public/assets/images/hotel-background.jpg);
   min-height: 100vh;
   height: 100%;
 }
 
-.homepage-banner .banner-text h1,
-.homepage-banner .banner-text h2 {
+.homepage-banner .banner-text h1 {
   font-size: 4.9em;
+  padding-right: 0.4em;
 }
 
 .carousel-control-prev-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23404040'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
 }
 
 .carousel-control-next-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23404040'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
 
-.homepage-banner-button {
+.carousel-inner {
+  overflow: visible;
+}
+
+.carousel-control-prev {
+  left: -4em;
+}
+
+.carousel-control-next {
+  right: -4em;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.banner-button {
   width: auto;
   margin: auto;
   padding-bottom: 5em;
+  padding-top: 1em;
+}
+
+.homepage-banner .banner-button {
   padding-top: 3em;
 }
 
@@ -156,18 +182,26 @@ a:hover {
   top: 40%;
 }
 
-.banner-text h1,
-.banner-text h2 {
+.homepage-banner .banner-text h1 {
+  padding-top: 2.8em;
+}
+
+.banner-text h1 {
   font-size: 3.8em;
   color: #fff;
   font-weight: 600;
-  padding-top: 2.8em;
-  padding-bottom: 1em;
-  padding-right: 0.4em;
+  padding-top: 2.2em;
 }
 
-.banner-text h1 strong,
-.banner-text h2 strong {
+.banner-text h4 {
+  font-size: 1.5em;
+  color: #c39c5f;
+  font-weight: 600;
+  padding-top: 0.4em;
+  padding-bottom: 1em;
+}
+
+.banner-text h1 strong{
   color: #6ed556fc;
 }
 
@@ -179,29 +213,45 @@ a:hover {
 
 .card {
   border-radius: 0.6em;
+  box-shadow: 0 0 20px 0px rgb(0 0 0 / 29%);
+  border: 0;
+  height: 100%;
 }
 
 .carousel-indicators {
-  bottom: -2em;
+  bottom: -3em;
 }
 
-.carousel-control-next,
-.carousel-control-prev {
-  color: #0a0a0a;
+.carousel-indicators .active {
+  opacity: 1;
+  background-color: #8d6d37;
 }
+
 
 .carousel-item {
-  transition: transform 0.6s ease-in;
+  transition: all 2s ease;
+  -webkit-transition:  all 2s ease;
+}
+
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  transition: opacity 0.4s ease-in-out;
+  -webkit-transition:  opacity 0.4s ease-in-out;
 }
 
 
-.hotel-slider-img {
-  object-fit: cover;
-  height: 20em;
+.homepage-banner .card-img-top {
+  height: 18em;
 }
 
 .card-img-top {
-  border-radius: 0.6em;
+  border-radius: 0.6em 0.6em 0 0;
+  object-fit: cover;
+  height: 14em;
+}
+
+.card-title {
+  font-size: 2em;
 }
 
 .card-text {
@@ -223,9 +273,13 @@ a:hover {
 }
 
 .hotel-banner {
-  background-image: linear-gradient(rgb(0 0 0 / 30%), rgb(0 0 0 / 77%)), url(/public/assets/images/hotel-background2.jpg);
+  background-image: linear-gradient(rgb(0 0 0 / 50%), rgb(0 0 0 / 77%)), url(/public/assets/images/hotel-background2.jpg);
   min-height: 100vh;
   height: 100%;
+}
+
+.list-hotels {
+  margin-top: 3em;
 }
 
 /* LOGIN PAGE */
@@ -261,4 +315,58 @@ a:hover {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+//hotel-page
+
+.hotel-description {
+  font-size: 1.7em;
+  color: #fff;
+  font-weight: 600;
+  padding-top: 0.2em;
+  padding-right: 2em;
+  text-align: justify;
+}
+
+.carrousel-suites {
+  top: -3em;
+}
+
+.list-suites {
+  margin-top: 2.5em;
+  scroll-margin-top: 75px;
+}
+
+.list-suites h2 {
+  font-size: 1.7em;
+  color: #fff;
+  font-weight: 600;
+  padding-top: 0.2em;
+}
+
+.list-suites .card-container {
+  scroll-margin-top: 7em;
+}
+.list-suites .card-content {
+  text-align: justify;
+  font-size: 1.2em;
+}
+
+.list-suites .title {
+  text-align: center;
+  font-size:3em;
+  font-weight: 400;
+  display:block;
+  color: #0a0a0a;
+  margin-bottom: 1em;
+}
+
+.list-suites .title::after {
+  content: "";
+  display: block;
+  border-bottom: 4px solid rgb(0, 0, 0);
+  width: 15%;
+  margin: auto;
+  padding-top: 5px;
+
 }

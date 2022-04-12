@@ -15,7 +15,7 @@
 
                     <div class="carousel-indicators">
                         {% for etablissement in etablissements  %}
-                            <button type="button" data-bs-target="#carousel-hotels" data-bs-slide-to="{{ loop.index - 1 }}" class="active"></button>
+                            <button type="button" data-bs-target="#carousel-hotels" data-bs-slide-to="{{ loop.index - 1 }}" class="{% if loop.index == 1 %}active{% endif %}"></button>
                         {% endfor %}
                     </div>
 
@@ -29,7 +29,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">{{ etablissement }}</h4>
                                 <h6 class="card-subtitle"><strong>{{ etablissement.ville }}</strong> - {{ etablissement.suites|length }} suites</h6>
-                                <button class="btn-secondary" href="{{ path('app_hotel', {slug: etablissement.slug}) }}">View more</button>
+                                <button class="btn-secondary" href="{{ path('app_hotel', {slug: etablissement.slug}) }}">Decouvrir</button>
                             </div>
                             </a>
                         </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="homepage-banner-button col text-align-center">
+                <div class="banner-button col text-center">
                     <a class="btn-primary btn-call-action" href="{{ path('app_hotel_index') }}">Decouvrir nos etablissements</a>
                 </div>
             </div>
