@@ -4,9 +4,9 @@
 
 {% block body %}
 
-    <div class="container sign-in">
+    <div class="form-template">
+        <div class="container-form-template form-login">
 
-    <main class="form-signin">
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -14,15 +14,15 @@
 
             {% if app.user %}
                 <div class="mb-3">
-                    You are logged in as {{ app.user.email }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    Vous êtes connecté en tant que {{ app.user.email }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
             {% endif %}
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <div class="form-floating">
+            <h1 class="form-titre text-center">Se connecter</h1>
+            <div class="form-floating my-3">
                 <label for="inputEmail">Email</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
             </div>
-            <div class="form-floating">
+            <div class="form-floating my-3">
                 <label for="inputPassword">Password</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
             </div>
@@ -42,10 +42,13 @@
                 </div>
             #}
 
-            <button class="btn btn-lg btn-primary" type="submit">
-                Sign in
-            </button>
+            <div class="form-buttons pt-3">
+                <button class="btn-primary" type="submit">Se connecter</button>
+                <a class="btn-secondary" href="{{ path('app_register') }}">Créer une compte</a>
+            </div>
         </form>
-    </main>
+
+        </div>
+
     </div>
 {% endblock %}

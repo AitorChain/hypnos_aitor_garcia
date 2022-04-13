@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use App\Entity\Suite;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
+use App\Repository\SuiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,4 +90,37 @@ class ReservationController extends AbstractController
             'status' => 'error'
         ], 200);
     }
+
+    #[Route('/check_price', name:'_check_price', methods: ['GET', 'POST'])]
+
+    public function checkPrice(Request $request, SuiteRepository $suiteRepository): Response
+    {
+        $suite = $request->request->get('suite');
+
+        $suiteToCheck = $suiteRepository->findOneBy(
+            ['titre' => $suite]
+        );
+
+        $suitePrix = $suiteToCheck->getPrix();
+
+        if (!empty($suite)) {
+
+            return $this->json([
+                'code' => 200,
+                'status' => 'success',
+                'message' => $suite,
+
+            ], 200);
+
+        } else {
+
+            return $this->json([
+                'code' => 200,
+                'status' => 'error',
+                'message' => 'Date indisponible'
+            ], 200);
+
+        }
+    }
+
 }

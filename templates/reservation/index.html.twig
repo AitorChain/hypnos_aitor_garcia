@@ -3,17 +3,29 @@
 {% block title %}Hello ReservationController!{% endblock %}
 
 {% block body %}
+<div class="form-template">
+    <div class="container-form-template">
+        <h1 class="form-titre text-center">Reserver</h1>
     {{ form_start(form) }}
         {{ form_row(form.etablissement) }}
         {{ form_row(form.suite) }}
         {{ form_rest(form) }}
         {% if is_granted('ROLE_USER') %}
-            <button type="submit" id="submit_reservation">Réserver</button>
+        <div class="form-buttons pt-5">
+            <button type="submit" class="btn-primary" id="submit_reservation">Réserver</button>
+        </div>
         {% else %}
-            <span>Connectez-vous pour résérver</span>
-            <a href="{{ path('app_login') }}">Se connecter</a>
-            <a href="{{ path('app_register') }}">Creer une compte</a>
+            <p class="text-center">Connectez-vous pour résérver</p>
+            <div class="form-buttons">
+                <a class="btn-primary" href="{{ path('app_login') }}">Se connecter</a>
+                <a class="btn-secondary" href="{{ path('app_register') }}">Créer une compte</a>
+            </div>
         {% endif %}
+        <div class="info-prix">
+
+        </div>
     {{ form_end(form) }}
+    </div>
+</div>
 
 {% endblock %}

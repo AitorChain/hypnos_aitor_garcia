@@ -16,9 +16,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="hotel-description col-xl-8">
+                <div class="hotel-description col">
                     <p>{{ etablissement.description }}</p>
                 </div>
+                {% if suites %}
                 <div id="carousel-suites" class="carrousel-suites col-xl-4 text-center carousel slide carousel-fade" data-bs-ride="carousel">
 
                     <div class="carousel-indicators">
@@ -39,7 +40,7 @@
                                 {% endif %}
                                 <div class="card-body">
                                     <h4 class="card-title">{{ suite }}</h4>
-                                    <p class="card-content">{{ suite.description|slice(0,150) ~ '...' }}</p>
+                                    <p class="card-content">{{ suite.description|slice(0,125) ~ '...' }}</p>
                                     <a href="#suite-{{ loop.index }}">
                                     <button class="btn-secondary" href="#suite-{{ loop.index }}">Savoir plus</button>
                                     </a>
@@ -56,11 +57,16 @@
                         </button>
                     </div>
                 </div>
+                {% endif %}
 
             </div>
+            {% if suites %}
             <div class="banner-button col text-center">
                 <a class="btn-primary btn-call-action" href="#list-suites">Decouvrir les suites</a>
             </div>
+            {% else %}
+                <h4 class="non-suites">Cet hôtel n'a pas des suites disponibles</h4>
+            {% endif %}
         </section>
     </div>
 
@@ -75,6 +81,22 @@
         {% for suite in suites  %}
             <div class="cols-xl-2 col-md-12 card-container" id="suite-{{ loop.index }}">
                 <div class="card text-center">
+                    <div class="top-card-content">
+                        <section class="price-box">
+                            <h4 class="price-text"><strong>{{ (suite.prix/100)|number_format(2, ',', '.') }}</strong>€/<em>nuit</em></h4>
+                        </section>
+                        {% for photo in suite.gallerieImages  %}
+                            {% if loop.index == 1 %}
+                                    <section class="gallery-box" data-bs-toggle="modal" data-bs-target="#{{ suite.titre|replace({' ':'_'}) }}">
+                                        <img class="gallery" src="/uploads/images/{{ photo.imageName }}" alt="">
+                                        <i class="gallery-icon" ><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-images" viewBox="0 0 16 16">
+                                                <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                                <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
+                                            </svg></i>
+                                    </section>
+                            {% endif %}
+                    {% endfor %}
+                    </div>
                     {% if suite.photoFilename is not null %}
                         <img class="card-img-top" src="/uploads/images/{{ suite.photoFilename }}" alt="">
                     {% else %}
@@ -83,9 +105,60 @@
                     <div class="card-body">
                         <h4 class="card-title">{{ suite.titre }}</h4>
                         <p class="card-content">{{ suite.description }}</p>
-                        <a href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">
-                        <button class="btn-secondary" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">Reserver</button>
-                        </a>
+                        <section class="booking-buttons">
+                            <a class="" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">
+                            <button class="btn-primary booking-button" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">Reserver</button>
+                            </a>
+                            <a class="" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">
+                                <button class="btn-secondary booking-button" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">Voir en Booking</button>
+                            </a>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="{{ suite.titre|replace({' ':'_'}) }}" role="dialog" tabindex="-1" aria-labelledby="galleryModal" aria-hidden="true">
+                <div class="modal-dialog modal-gallery modal-xl modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="close-modal">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="indicators-{{ suite.titre|replace({' ':'_'}) }}" class="carousel slide" data-interval="false">
+                            <ul class="carousel-indicators">
+                                {% for photo in suite.gallerieImages  %}
+                                <li data-target="#indicators-{{ suite.titre|replace({' ':'_'}) }}" data-slide-to="{{ loop.index - 1 }}" class="active"></li>
+                                {% endfor %}
+
+                            </ul>
+                            <div id="carousel-gallery-{{ suite.titre|replace({' ':'_'}) }}" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+                                <div class="carousel-indicators">
+                                    {% for photo in suite.gallerieImages  %}
+                                        <button type="button" data-bs-target="#carousel-gallery-{{ suite.titre|replace({' ':'_'}) }}" data-bs-slide-to="{{ loop.index - 1 }}" class="{% if loop.index == 1 %}active{% endif %}">></button>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="carousel-inner">
+                                    {% for photo in suite.gallerieImages  %}
+
+                                        <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                                                <img class="gallerie-photos" src="/uploads/images/{{ photo.imageName }}" alt="">
+                                        </div>
+
+                                    {% endfor %}
+
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-gallery-{{ suite.titre|replace({' ':'_'}) }}" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carousel-gallery-{{ suite.titre|replace({' ':'_'}) }}" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -98,3 +171,4 @@
     {% endif %}
 
 {% endblock %}
+

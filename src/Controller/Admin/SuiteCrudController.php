@@ -34,7 +34,9 @@ class SuiteCrudController extends AbstractCrudController
             });
         yield TextField::new('titre');
         yield TextareaField::new('description');
-        yield MoneyField::new('prix')->setCurrency('EUR');
+        yield MoneyField::new('prix')
+            ->setCurrency('EUR')
+            ->setStoredAsCents();
         yield TextField::new('lien_booking');
         yield ImageField::new('photoFilename')
             ->setBasePath('/uploads/images')

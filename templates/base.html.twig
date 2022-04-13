@@ -69,12 +69,14 @@
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a href="{{ path('app_register') }}">Créer une compte</a>
+                    <a href="{{ path('app_login') }}">Se connecter</a>
                 </li>
             {% endif %}
+            <a href="{{ path('app_reservation_new')}}">
             <button class="btn-primary btn-nav" href="{{ path('app_reservation_new')}}">
                 Reserver
             </button>
+            </a>
         </div>
     </nav>
 </header>
@@ -93,7 +95,7 @@
         {% elseif is_granted('ROLE_ADMIN') %}
             <li class="nav-item"><a href="{{ path('admin') }}" class="nav-link px-2">Administration</a></li>
         {% else %}
-            <li class="nav-item"><a href="{{ path('app_register') }}" class="nav-link px-2">Créer une compte</a></li>
+            <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link px-2">Se connecter</a></li>
         {% endif %}
         <li class="nav-item"><a href="{{ path('app_reservation_new')}}" class="nav-link px-2">Reserver</a></li>
     </ul>

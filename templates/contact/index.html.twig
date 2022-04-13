@@ -3,8 +3,19 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
+<div class="form-template">
+    <div class="container-form-template">
+        <h1 class="form-titre text-center">Contactez-nous</h1>
 
-    {{ form_start(form) }}
-    <button type="submit" class="btn">Envoyer</button>
+
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.sujet) }}
+        {{ form_row(form.message) }}
+    <button type="submit" class="btn-secondary contact-form-button">Envoyer</button>
     {{ form_end(form) }}
+    </div>
+</div>
 {% endblock %}

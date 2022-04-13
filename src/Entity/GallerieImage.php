@@ -52,7 +52,7 @@ class GallerieImage
         return $this->imageName;
     }
 
-    public function setImageName(string $imageName): self
+    public function setImageName(?string $imageName)
     {
         $this->imageName = $imageName;
 
@@ -104,7 +104,7 @@ class GallerieImage
         return $this->imageSize;
     }
 
-    public function setImageSize(int $imageSize): self
+    public function setImageSize(?int $imageSize): self
     {
         $this->imageSize = $imageSize;
 

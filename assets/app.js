@@ -69,16 +69,44 @@ $('#reservation_suite, #reservation_checkIn, #reservation_checkOut').addClass('c
 const $check_availability = $('.check_availability')
 
 $check_availability.change(function(){
-
+    let form = $check_availability.closest('form')
     let $suite = $('#reservation_suite').val()
     let $checkIn= $('#reservation_checkIn').val()
     let $checkOut= $('#reservation_checkOut').val()
 
     if ($suite && $checkIn && $checkOut) {
-        let data={};
-        data['suite'] = $suite;
-        data['checkIn'] = $checkIn;
-        data['checkOut'] = $checkOut;
+
+        let $daysInSeconds = Date.parse($checkOut) - Date.parse($checkIn)
+        let $days = $daysInSeconds/86400000
+
+        let dataPrix={}
+        dataPrix['suite'] = $suite
+
+        $.ajax({
+            type: 'POST',
+            url: '/reservation/check_price',
+            data: dataPrix,
+            error: function(){
+                console.log(dataPrix)
+            },
+            success: function(data){
+                console.log(data.message)
+                if(data.status === 'error'){
+                    console.log('La suite n\'est pas disponible, choissisez une autre date')
+                    $("#submit_reservation").attr('disabled', true)
+
+                }else{
+                    console.log('La suite est disponible')
+                    console.log(data.message)
+                    $("#submit_reservation").attr('disabled', false)
+                }
+            }
+        })
+
+        let data={}
+        data['suite'] = $suite
+        data['checkIn'] = $checkIn
+        data['checkOut'] = $checkOut
 
         $.ajax({
             type: 'POST',
@@ -102,6 +130,10 @@ $check_availability.change(function(){
     }
 
 })
+
+
+//modal
+
 
 
 

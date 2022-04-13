@@ -13,8 +13,8 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('prenom')
             ->add('nom')
+            ->add('prenom')
             ->add('email')
             ->add('sujet', ChoiceType::class, [
                 'placeholder' => 'Chosissez une sujet',

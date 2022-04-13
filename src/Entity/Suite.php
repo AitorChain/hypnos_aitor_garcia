@@ -21,7 +21,7 @@ class Suite
     #[ORM\Column(type: 'text')]
     private $description;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'float')]
     private $prix;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -80,12 +80,12 @@ class Suite
         return $this;
     }
 
-    public function getPrix(): ?int
+    public function getPrix(): ?float
     {
         return $this->prix;
     }
 
-    public function setPrix(int $prix): self
+    public function setPrix(float $prix): self
     {
         $this->prix = $prix;
 
