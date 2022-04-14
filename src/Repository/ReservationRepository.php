@@ -48,10 +48,9 @@ class ReservationRepository extends ServiceEntityRepository
     public function isAvailable($suite, $checkIn, $checkOut)
     {
         $query = $this->createQueryBuilder('r')
-            ->where('r.suite = :suite')
+            ->andWhere('r.suite = :suite AND r.checkIn BETWEEN :checkIn AND :checkOut')
+            ->orWhere('r.suite = :suite AND r.checkOut BETWEEN :checkIn AND :checkOut')
             ->setParameter('suite', $suite )
-            ->andWhere('r.checkIn BETWEEN :checkIn AND :checkOut')
-            ->orWhere('r.checkOut BETWEEN :checkIn AND :checkOut')
             ->setParameter('checkIn', $checkIn )
             ->setParameter('checkOut', $checkOut )
             ;

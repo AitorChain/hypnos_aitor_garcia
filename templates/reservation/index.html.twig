@@ -10,10 +10,28 @@
         {{ form_row(form.etablissement) }}
         {{ form_row(form.suite) }}
         {{ form_rest(form) }}
+        <p id="availability_info"></p>
         {% if is_granted('ROLE_USER') %}
         <div class="form-buttons pt-5">
-            <button type="submit" class="btn-primary" id="submit_reservation">Réserver</button>
+            <button type="button" class="btn-primary" id="submit_reservation"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">Réserver</button>
         </div>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered reservation-alert">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Validez votre réservation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="alert-modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn-primary" id="submit_reservation">Valider</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% else %}
             <p class="text-center">Connectez-vous pour résérver</p>
             <div class="form-buttons">
@@ -27,5 +45,6 @@
     {{ form_end(form) }}
     </div>
 </div>
+
 
 {% endblock %}

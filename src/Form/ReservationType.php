@@ -23,9 +23,9 @@ class ReservationType extends AbstractType
         $builder
             ->add('etablissement', EntityType::class, [
                 'class' => Etablissement::class,
-                'placeholder' => 'Choisissez un etablissement',
+                'placeholder' => 'Choisissez un hôtel',
                 'mapped' => false,
-
+                'label' => 'Hôtel'
             ])
             ->add('checkIn', DateType::class, [
                 'widget' => 'single_text',

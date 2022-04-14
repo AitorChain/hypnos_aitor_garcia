@@ -58,12 +58,11 @@ class ReservationController extends AbstractController
 
                 return $this->json([
                     'code' => 200,
-                    'status' => 'error',
-                    'message' => 'Date invalide'
+                    'status' => 'invalid_date',
+                    'message' => 'Vous pouvez pas voyager dans le temps'
                 ], 200);
 
             } else {
-
                 $reservations = $reservationRepository->isAvailable($suite, $checkIn, $checkOut);
 
                 if (count($reservations) === 0) {
@@ -98,17 +97,21 @@ class ReservationController extends AbstractController
         $suite = $request->request->get('suite');
 
         $suiteToCheck = $suiteRepository->findOneBy(
-            ['titre' => $suite]
+            ['id' => $suite]
         );
 
         $suitePrix = $suiteToCheck->getPrix();
+
+        //$suitePrix = floatval($suitePrix);
+
+
 
         if (!empty($suite)) {
 
             return $this->json([
                 'code' => 200,
                 'status' => 'success',
-                'message' => $suite,
+                'message' => $suitePrix,
 
             ], 200);
 
@@ -117,7 +120,7 @@ class ReservationController extends AbstractController
             return $this->json([
                 'code' => 200,
                 'status' => 'error',
-                'message' => 'Date indisponible'
+                'message' => ''
             ], 200);
 
         }
