@@ -1,2 +1,2 @@
-release: sh -c 'php bin/console doctrine:migrations:migrate --no-interaction && mkdir '
+release: php bin/console doctrine:migrations:migrate --no-interaction
 web: heroku-php-apache2 public/
