@@ -23,7 +23,7 @@ class Reservation
     #[Assert\NotBlank]
     private $checkOut;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Suite::class, inversedBy: 'reservations')]
@@ -38,6 +38,11 @@ class Reservation
     public function __toString()
     {
         return $this->id.'_'.$this->client;
+    }
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -69,12 +74,12 @@ class Reservation
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 

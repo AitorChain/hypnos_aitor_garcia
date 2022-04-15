@@ -23,7 +23,6 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $demande->setCreatedAt(new \DateTimeImmutable());
             $entityManager->persist($demande);
             $entityManager->flush();
 

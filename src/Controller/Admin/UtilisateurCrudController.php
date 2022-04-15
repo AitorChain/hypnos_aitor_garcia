@@ -67,7 +67,7 @@ class UtilisateurCrudController extends AbstractCrudController
             ->setPermission(Action::NEW, 'ROLE_ADMIN')
             ->setPermission(Action::DELETE, 'ROLE_ADMIN')
             ->setPermission(Action::EDIT, 'ROLE_ADMIN')
-            ->setPermission(Action::DETAIL, 'ROLE_GERANT')
+            ->setPermission(Action::DETAIL, 'ROLE_ADMIN')
             ;
     }
 

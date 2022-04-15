@@ -28,7 +28,6 @@ class ReservationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $reservation->setCreatedAt(new \DateTimeImmutable());
             $reservation->setClient($this->getUser());
             $entityManager->persist($reservation);
             $entityManager->flush();
