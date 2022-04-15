@@ -39,7 +39,7 @@ class ReservationCrudController extends AbstractCrudController
         yield DateField::new('checkOut')
             ->setLabel('Date de depart');
         yield AssociationField::new('suite')
-            ->setLabel('Suite reservée');;
+            ->setLabel('Suite reservée');
         yield AssociationField::new('client')
             ->setPermission('ROLE_GERANT')
             ->setLabel('Nom du client');
