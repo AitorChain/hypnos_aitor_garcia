@@ -69,7 +69,15 @@ class AdminDashboardController extends AbstractDashboardController
                 ->setAction(Crud::PAGE_INDEX)
             ]);
 
+        yield MenuItem::subMenu('Demandes', 'fas fa-envelope')->setSubItems([
+            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Demande::class)
+                ->setAction(Crud::PAGE_INDEX),
+            MenuItem::linkToCrud('Voir liste', 'fas fa-eye', Demande::class)
+                ->setAction(Crud::PAGE_INDEX)
+        ]);
+
         yield MenuItem::linkToCrud('Demandes', 'fas fa-envelope', Demande::class);
+
 
     }
 
