@@ -59,9 +59,11 @@ class EtablissementCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('nom');
+        yield TextField::new('nom')
+        ->setLabel('Nom de l\'hôtel');
         yield TextField::new('ville');
-        yield TextField::new('addrese');
+        yield TextField::new('addrese')
+            ->setLabel('Adresse');
         yield AssociationField::new('gerant')
             //Fixes the search to only display gerant users
             ->setQueryBuilder(function (QueryBuilder $queryBuilder){
@@ -74,7 +76,7 @@ class EtablissementCrudController extends AbstractCrudController
         yield ImageField::new('photoFilename')
             ->setBasePath('/uploads/images')
             ->setUploadDir('/public/uploads/images')
-            ->setLabel('Photo')
+            ->setLabel('Image de mise en avant')
         ;
         yield TextareaField::new('description')
         ->hideOnIndex();

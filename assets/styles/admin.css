@@ -11,7 +11,7 @@
     --table-cell-color: black;
     --table-thead-color: black;
     --user-name-color: black;
-    --user-avatar-icon-color: black;
+    --user-avatar-icon-color: var(--color-primary);
     --user-avatar-icon-bg: white;
     --dropdown-appearance-icon-color: black;
     --dropdown-appearance-active-item-bg: #00000017;
@@ -26,6 +26,7 @@
     --dropdown-link-color: var(--color-primary);
     --table-thead-marker-color: var(--color-primary);
     --bs-table-bg: white;
+    --responsive-header-bg: white;
 }
 
 #main-menu .menu .menu-icon,
@@ -77,10 +78,10 @@ body.ea-sidebar-width-compact #main-menu .menu .menu-item:hover {
     }
 
     .sidebar {
-        box-shadow: 0 0 7px -2px #000;
+        box-shadow: 0 0 13px 0 #00000063;
     }
     .content-header-title .title {
-        font-size: 3.5em;
+        font-size: 3em;
         font-weight: 300;
     }
     .content-header-title .title::after {
@@ -94,6 +95,34 @@ body.ea-sidebar-width-compact #main-menu .menu .menu-item:hover {
 
     .content-top .content-search .form-widget {
         display: flex;
+    }
+
+    .user-menu-wrapper a.user-details, .user-menu-wrapper a.user-details:hover {
+        padding-right: 1.25em;
+        box-shadow: 0 0 8px 0 #00000040;
+    }
+
+    .user-menu-wrapper a.user-details, .user-menu-wrapper a.user-details:hover {
+        background-color:white;
+        padding: 0.55em;
+        border-radius: 5px;
+    }
+
+    .user-menu-wrapper span.user-avatar .fa-stack,
+    .user-menu-wrapper .dropdown-menu .dropdown-user-details span.user-avatar .fa-stack .user-avatar-icon-foreground {
+        font-size: 14px !important;
+    }
+
+    .user-menu-wrapper .dropdown-menu .dropdown-user-details span.user-avatar .fa-stack i {
+        width: 32px ;
+    }
+    .user-menu-wrapper .dropdown-menu .dropdown-user-details span.user-avatar .fa-stack .user-avatar-icon-background {
+        font-size: 30px;
+    }
+
+    .content-header .page-actions .btn {
+        margin-top:0 !important;
+        margin-left: 0.5em !important ;
     }
 }
 
@@ -138,8 +167,6 @@ body.ea-sidebar-width-compact #main-menu .menu .menu-item:hover {
 
 .user-menu-wrapper a.user-details, .user-menu-wrapper a.user-details:hover {
     background-color:white;
-    padding-right: 1.25em;
-    box-shadow: 0 0 4px 0 black;
 }
 
 dl.datalist .data-row  {
@@ -168,6 +195,41 @@ dl.datalist .data-row:first-child {
 
 .dropdown-appearance {
     display:none;
+}
+
+.responsive-header #responsive-header-logo {
+    width: 24em;
+    margin: auto 2em;
+}
+
+#navigation-toggler {
+    font-size: 2.8em;
+}
+
+.user-menu-wrapper span.user-avatar .fa-stack {
+    font-size: 2.5em;
+}
+
+.pagination {
+    justify-content: center;
+}
+
+.content-header .page-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.content-header .page-actions .btn {
+    margin-top: 1.5em;
+    margin-left: 0;
+}
+
+.content-header-title .title {
+    padding: 0;
+}
+
+.badge.badge-secondary {
+    white-space: pre-line;
 }
 
 

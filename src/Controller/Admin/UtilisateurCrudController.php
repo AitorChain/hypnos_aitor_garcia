@@ -53,6 +53,7 @@ class UtilisateurCrudController extends AbstractCrudController
             ->formatValue(function ($value, $entity){
                 return implode(",",$entity->getEtablissements()->toArray());
             })
+            ->setLabel('Hôtels qu\'il gère')
             ->setDisabled()
             ->setPermission('ROLE_ADMIN')
             ->hideWhenCreating()

@@ -37,9 +37,8 @@ class Reservation
 
     public function __toString()
     {
-        return rand(0, 50000).' '.$this->suite.' '.$this->client;
+        return $this->id.'_'.str_replace(' ', '_', $this->suite);
     }
-
 
     public function getId(): ?int
     {

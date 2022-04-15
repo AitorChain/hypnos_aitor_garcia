@@ -27,27 +27,31 @@ class SuiteCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('etablissement')
+            ->setLabel('Hôtel')
             ->setQueryBuilder(function (QueryBuilder $queryBuilder){
                $queryBuilder
                     ->where('entity.gerant = :gerant')
                     ->setParameter('gerant', $this->getUser());
             });
-        yield TextField::new('titre');
-        yield TextareaField::new('description');
-        yield MoneyField::new('prix')
-            ->setCurrency('EUR')
-            ->setStoredAsCents();
-        yield TextField::new('lien_booking');
+        yield TextField::new('titre')
+            ->setLabel('Nom de la suite');
+        yield TextareaField::new('description')
+            ->hideOnIndex();
+        yield TextField::new('lien_booking')
+            ->setLabel('Page en Booking.com');
         yield ImageField::new('photoFilename')
             ->setBasePath('/uploads/images')
             ->setUploadDir('/public/uploads/images')
-            ->setLabel('Background photo')
+            ->setLabel('Image de mise en avant')
         ;
         yield CollectionField::new('gallerieImages')
             ->setLabel('')
             ->setEntryType(GallerieType::class)
             ->setFormTypeOption('by_reference', false)
             ->onlyOnForms();
+        yield MoneyField::new('prix')
+            ->setCurrency('EUR')
+            ->setStoredAsCents();
     }
 
     public function configureActions(Actions $actions): Actions

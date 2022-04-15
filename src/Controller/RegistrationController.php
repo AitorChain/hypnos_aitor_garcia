@@ -31,6 +31,8 @@ class RegistrationController extends AbstractController
             }
         }
 
+
+
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

@@ -32,11 +32,17 @@ class ReservationCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield DateField::new('checkIn');
-        yield DateField::new('checkOut');
-        yield AssociationField::new('suite');
+        yield DateTimeField::new('createdAt')
+            ->setLabel('Date de reservation');
+        yield DateField::new('checkIn')
+            ->setLabel('Date d\'arrivée');
+        yield DateField::new('checkOut')
+            ->setLabel('Date de depart');
+        yield AssociationField::new('suite')
+            ->setLabel('Suite reservée');;
         yield AssociationField::new('client')
-            ->setPermission('ROLE_GERANT');
+            ->setPermission('ROLE_GERANT')
+            ->setLabel('Nom du client');
     }
 
     public function configureCrud(Crud $crud): Crud
