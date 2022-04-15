@@ -30,7 +30,7 @@ class ReservationCrudController extends AbstractCrudController
         return Reservation::class;
     }
 
-    public function configureFields(string $pageName): iterable
+    /*public function configureFields(string $pageName): iterable
     {
         yield DateTimeField::new('createdAt')
             ->setLabel('Date de reservation');
@@ -95,6 +95,6 @@ class ReservationCrudController extends AbstractCrudController
             parent::deleteEntity($entityManager, $entityInstance);
         }
 
-    }
+    }*/
 
 }
