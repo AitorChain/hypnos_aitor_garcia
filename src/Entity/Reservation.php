@@ -37,7 +37,7 @@ class Reservation
 
     public function __toString()
     {
-        return $this->id.'_'.str_replace(' ', '_', $this->suite);
+        return $this->id.'_'.$this->client;
     }
 
     public function getId(): ?int

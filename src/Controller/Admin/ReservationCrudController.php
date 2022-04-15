@@ -29,7 +29,7 @@ class ReservationCrudController extends AbstractCrudController
     {
         return Reservation::class;
     }
-
+/*
     public function configureFields(string $pageName): iterable
     {
         yield DateTimeField::new('createdAt')
@@ -45,25 +45,25 @@ class ReservationCrudController extends AbstractCrudController
             ->setLabel('Nom du client');
     }
 
-public function configureCrud(Crud $crud): Crud
+    public function configureCrud(Crud $crud): Crud
     {
-        return $crud;
-            /*->showEntityActionsInlined()
+        return $crud
+            ->showEntityActionsInlined()
             ->setEntityLabelInPlural('Reservations')
-            ->setEntityLabelInSingular('Reservation');*/
+            ->setEntityLabelInSingular('Reservation');
     }
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions;
-            /*->add(Crud::PAGE_INDEX, Action::DETAIL)
+        return $actions
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->setPermission(Action::NEW, 'ROLE_ADMIN')
             ->setPermission(Action::EDIT, 'ROLE_GERANT')
-            ;*/
+            ;
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
-    {/*
+    {
 
         if ($this->isGranted('ROLE_CLIENT')) {
 
@@ -79,13 +79,13 @@ public function configureCrud(Crud $crud): Crud
                 ->where('e.gerant = :gerant')
                 ->setParameter('gerant', $this->getUser());
 
-        }*/
+        }
         return parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
     }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-/*
+
         $checkIn = date_timestamp_get($entityInstance->getCheckIn());
         $annulation = $checkIn - (259200);
 
@@ -94,7 +94,7 @@ public function configureCrud(Crud $crud): Crud
         } elseif($this->isGranted('ROLE_GERANT')){
             parent::deleteEntity($entityManager, $entityInstance);
         }
-*/
-    }
 
+    }
+*/
 }
