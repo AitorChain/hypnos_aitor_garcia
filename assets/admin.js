@@ -4,7 +4,7 @@ import bsCustomFileInput from 'bs-custom-file-input';
 
 bsCustomFileInput.init();
 
-$('.ea-index-Reservation > .action-delete').attr('data-bs-target', '#modal-delete-restriction')
+/*$('#ea-index-Reservation > .action-delete').attr('data-bs-target', '#modal-delete-restriction')
 
 $('#main').prepend('<div id="modal-delete-restriction" class="modal fade" tabindex="-1" bis_skin_checked="1">\n' +
     '    <div class="modal-dialog" bis_skin_checked="1">\n' +
@@ -24,4 +24,4 @@ $('#main').prepend('<div id="modal-delete-restriction" class="modal fade" tabind
     '            </div>\n' +
     '        </div>\n' +
     '    </div>\n' +
-    '</div>')
+    '</div>')*/
