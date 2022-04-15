@@ -11,6 +11,7 @@
                 <div class="banner-text col-xl-8 text-align-left">
                     <h1>Decouvrez nos hôtels, profitez des vacances excepticionnelles.</h1>
                 </div>
+                {% if etablissements %}
                 <div id="carousel-hotels" class="carrousel-hotels col-xl-4 text-center carousel slide carousel-fade" data-bs-ride="carousel">
 
                     <div class="carousel-indicators">
@@ -48,6 +49,7 @@
                 <div class="banner-button col text-center">
                     <a class="btn-primary btn-call-action" href="{{ path('app_hotel_index') }}">Decouvrir nos etablissements</a>
                 </div>
+                {% endif %}
             </div>
         </section>
 
