@@ -53,11 +53,18 @@ class SuiteCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            // ...
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->setPermission(Action::NEW, 'ROLE_GERANT')
             ->setPermission(Action::DELETE, 'ROLE_GERANT')
             ->setPermission(Action::EDIT, 'ROLE_GERANT')
-            ->setPermission(Action::DETAIL, 'ROLE_GERANT')
             ;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->showEntityActionsInlined()
+            ->setEntityLabelInPlural('Suites')
+            ->setEntityLabelInSingular('Suite');
     }
 }

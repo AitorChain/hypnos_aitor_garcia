@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hotel {{ etablissement }}{% endblock %}
+{% block title %}{{ etablissement }} | {{ parent() }}{% endblock %}
 
 {% block body %}
 
@@ -109,8 +109,8 @@
                             <a class="" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">
                             <button class="btn-primary booking-button" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">Reserver</button>
                             </a>
-                            <a class="" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">
-                                <button class="btn-secondary booking-button" href="{{path('app_reservation_new', {etablissement: etablissement.id, suite: suite.id}) }}">Voir en Booking</button>
+                            <a class="" href="https://{{suite.lienBooking}}">
+                                <button class="btn-secondary booking-button" href="https://{{suite.lienBooking}}">Voir en Booking</button>
                             </a>
                         </section>
                     </div>

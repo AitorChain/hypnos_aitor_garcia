@@ -13,6 +13,10 @@ header {
   transition: transform 0.5s;
 }
 
+.fixed-top {
+  top: -0.2em;
+}
+
 a {
   color: #404040;
   text-decoration: none;
@@ -42,39 +46,39 @@ a:hover {
 }
 
 .btn-primary {
-  border: 4px solid #8d6d37;
-  background-color: #8d6d37;
+  border: 4px solid #ab8442;
+  background-color: #ab8442;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #8d6d37b3;
-  border-color: #8d6d37b3;
+  background-color: #ab8442b3;
+  border-color: #ab8442b3;
 }
 
 
 .btn-primary:disabled, .btn-primary.disabled {
-  background-color: #8d6d37;
+  background-color: #ab8442;
   cursor: alias;
-  border-color: #8d6d37;
+  border-color: #ab8442;
   filter: opacity(0.5);
 }
 
 .btn-primary:disabled:hover, .btn-primary:disabled:focus{
-  border: 4px solid #8d6d37;
-  background-color: #8d6d37;
+  border: 4px solid #ab8442;
+  background-color: #ab8442;
 }
 
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #8d6d37b3;
-  border-color: #8d6d37b3;
+  background-color: #ab8442b3;
+  border-color: #ab8442b3;
 }
 
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #fff;
-  background-color: #8d6d37b3;
-  border-color: #8d6d37b3;
+  background-color: #ab8442b3;
+  border-color: #ab8442b3;
   box-shadow: none;
 }
 
@@ -142,8 +146,12 @@ a:hover {
   margin-left: 1em;
 }
 
+.nav-link {
+  color: #000;
+}
+
 .nav-link:hover, .nav-link:focus {
-  color: #8d6d37;
+  color: #ab8442;
 }
 
 .dropdown {
@@ -153,7 +161,7 @@ a:hover {
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #8d6d37;
+  background-color: #ab8442;
 }
 
 @media (max-width: 1200px) {
@@ -211,8 +219,8 @@ a:hover {
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
-  width: 6.5em;
-  height: 6.5em;
+  width: 4.5em;
+  height: 4.5em;
 }
 
 .banner-button {
@@ -270,7 +278,7 @@ a:hover {
 
 .carousel-indicators .active {
   opacity: 1;
-  background-color: #8d6d37;
+  background-color: #ab8442;
 }
 
 
@@ -609,7 +617,7 @@ a:hover {
 }
 
 .booking-button {
-  padding: 0.5em 3em;
+  padding: 0.5em 2.5em;
 }
 
 .non-suites {

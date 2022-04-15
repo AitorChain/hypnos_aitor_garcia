@@ -17,8 +17,18 @@ class RegistrationController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        $admin = 'ROLE_ADMIN';
+        $gerant = 'ROLE_GERANT';
+        $client = 'ROLE_CLIENT';
+
         if ($this->getUser()) {
-            return $this->redirectToRoute('profile');
+            if (in_array($admin, $this->getUser()->getRoles())) {
+                return $this->redirectToRoute('admin');
+            } elseif (in_array($gerant, $this->getUser()->getRoles())) {
+                return $this->redirectToRoute('gerance');
+            } else {
+                return $this->redirectToRoute('profile');
+            }
         }
 
         $user = new Utilisateur();
@@ -40,7 +50,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('profile');
         }
 
         return $this->render('registration/register.html.twig', [

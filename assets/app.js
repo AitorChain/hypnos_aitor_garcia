@@ -19,8 +19,7 @@ bsCustomFileInput.init();
 
 let lastScrollTop = 0;
 $(window).scroll(function(){
-    var st = $(this).scrollTop();
-    var header = $('header');
+    let st = $(this).scrollTop();
     setTimeout(function(){
         if (st > lastScrollTop){
             $('header').css('transform', 'translateY(-7em)')
@@ -31,8 +30,16 @@ $(window).scroll(function(){
     }, 300);
 });
 
+//Here I set two format functions to currency and date
+let euroFR = Intl.NumberFormat("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+});
 
-//This script makes possible to load the suites of each etablissement without reloading the page
+let formatDate = new Intl.DateTimeFormat('fr-FR')
+
+
+//This script makes possible to load the suites of each etablissement if the user has clicked in the reservation button of the suite
 const $reservation_etablissement = $("#reservation_etablissement")
 const urlParams = new URLSearchParams(window.location.search)
 
@@ -40,19 +47,6 @@ const etablissementQuery = urlParams.get('etablissement')
 const suiteQuery = urlParams.get('suite')
 
 $reservation_etablissement.find('option[value="' + etablissementQuery + '"]').attr("selected", "selected")
-
-let euroFR = Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR",
-});
-
-let dollarUS = Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-});
-
-let formatDate = new Intl.DateTimeFormat('fr-FR')
-
 
 $(window).ready(function () {
     $("#submit_reservation").attr('disabled', true)
@@ -71,6 +65,7 @@ $(window).ready(function () {
             .removeClass('is-invalid')
     })
 
+    //Here I set a restriction to the date fields so the user cant input a past date
     let today = new Date()
     let dd = String(today.getDate()).padStart(2, '0')
     let mm = String(today.getMonth() + 1).padStart(2, '0')
@@ -82,6 +77,8 @@ $(window).ready(function () {
     $('#reservation_checkOut').attr('min',today)
 
 })
+
+//this makes possible to get the suites of each etablissements dinamycally without reloading the page
 
 $reservation_etablissement.on('change', function()
 {
@@ -105,11 +102,8 @@ $(document).on('change', '#reservation_suite, #reservation_checkIn, #reservation
     let suite = $('#reservation_suite').val()
     let checkIn= $('#reservation_checkIn').val()
     let checkOut= $('#reservation_checkOut').val()
-    let hotel = $('#reservation_etablissement').val()
     let hotelText = $('#reservation_etablissement option:selected').text()
     let suiteText = $('#reservation_suite option:selected').text()
-
-
 
     if (suite && checkIn && checkOut) {
 
@@ -125,15 +119,8 @@ $(document).on('change', '#reservation_suite, #reservation_checkIn, #reservation
             type: 'POST',
             url: '/reservation/check_price',
             data: dataPrix,
-            error: function(){
-                console.log(dataPrix)
-            },
             success: function(data){
-                if(data.status === 'error'){
-                    console.log('Impossible d\'envoyer le prix de la suite')
-
-                }else{
-                    //console.log(data.message)
+                if(data.status !== 'error'){
                     prix_suite = data.message
                     prix_sejour = (parseInt(prix_suite) * days) / 100
                 }
@@ -150,13 +137,8 @@ $(document).on('change', '#reservation_suite, #reservation_checkIn, #reservation
             type: 'POST',
             url: '/reservation/check_availability',
             data: data,
-            error: function(){
-                console.log('error')
-            },
             success: function(data){
-                console.log(data)
                 if(data.status === 'error'){
-                    console.log('La suite n\'est pas disponible pour ces dates, choissisez une autre date')
                     $("#submit_reservation").attr('disabled', true)
                     $("#reservation_checkIn").addClass('is-invalid')
                     $("#reservation_checkOut").addClass('is-invalid')
@@ -164,15 +146,12 @@ $(document).on('change', '#reservation_suite, #reservation_checkIn, #reservation
                         .html('<strong class="red">La suite n\'est disponible</strong>, <strong>chossisez une autre date</strong>')
 
                 } else if (data.status === 'invalid_date') {
-                    console.log('Vous ne pouvez pas voyager dans le temps!')
                     $("#reservation_checkIn").addClass('is-invalid')
                     $("#reservation_checkOut").addClass('is-invalid')
                     $("#availability_info")
                         .html('<strong>Les dates choisies ne sont pas valides</strong>')
 
                 } else {
-                    console.log('La suite est disponible')
-                    console.log(data);
                     $("#submit_reservation").attr('disabled', false)
                     $("#reservation_checkIn")
                         .removeClass('is-invalid')

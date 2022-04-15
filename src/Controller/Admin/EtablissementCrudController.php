@@ -30,17 +30,17 @@ class EtablissementCrudController extends AbstractCrudController
     {
         return $crud
             ->setEntityLabelInPlural('Hôtels')
-            ->setEntityLabelInSingular('Hôtel');
+            ->setEntityLabelInSingular('Hôtel')
+            ->showEntityActionsInlined();
     }
 
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            // ...
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->setPermission(Action::NEW, 'ROLE_ADMIN')
             ->setPermission(Action::DELETE, 'ROLE_ADMIN')
             ->setPermission(Action::EDIT, 'ROLE_ADMIN')
-            ->setPermission(Action::DETAIL, 'ROLE_ADMIN')
             ;
     }
 
@@ -71,13 +71,13 @@ class EtablissementCrudController extends AbstractCrudController
             ->setHelp("Si vous n'avez pas encore crée votre gérant, vous devez le créer et puis
             retourner sur cette page pour l'asigner a cet établissement")
             ->setPermission('ROLE_ADMIN');
-        yield TextareaField::new('description')
-        ->hideOnIndex();
         yield ImageField::new('photoFilename')
             ->setBasePath('/uploads/images')
             ->setUploadDir('/public/uploads/images')
             ->setLabel('Photo')
         ;
+        yield TextareaField::new('description')
+        ->hideOnIndex();
         yield AssociationField::new('suites', 'Nombre de suites')
         ->hideOnForm();
     }

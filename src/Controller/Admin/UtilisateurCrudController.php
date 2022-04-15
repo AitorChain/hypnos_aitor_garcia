@@ -35,6 +35,7 @@ class UtilisateurCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->showEntityActionsInlined()
             ->setEntityLabelInPlural('Gerants')
             ->setEntityLabelInSingular('Gerant')
             ->setHelp('new','Après la creation d\'un gérant, vous devez ajouter l\'etablissement a sa charge en éditant la page de l\'etablissement');
@@ -53,6 +54,7 @@ class UtilisateurCrudController extends AbstractCrudController
                 return implode(",",$entity->getEtablissements()->toArray());
             })
             ->setDisabled()
+            ->setPermission('ROLE_ADMIN')
             ->hideWhenCreating()
             ->setHelp("Vous devez ajouter le gérant a l'etablissement depuis la page de l'etablissement");
     }
@@ -60,11 +62,11 @@ class UtilisateurCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            // ...
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->setPermission(Action::NEW, 'ROLE_ADMIN')
             ->setPermission(Action::DELETE, 'ROLE_ADMIN')
             ->setPermission(Action::EDIT, 'ROLE_ADMIN')
-            ->setPermission(Action::DETAIL, 'ROLE_ADMIN')
+            ->setPermission(Action::DETAIL, 'ROLE_GERANT')
             ;
     }
 

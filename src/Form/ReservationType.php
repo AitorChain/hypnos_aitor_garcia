@@ -31,6 +31,7 @@ class ReservationType extends AbstractType
                 'widget' => 'single_text',
                 'by_reference' => true,
                 'mapped' => true,
+                'label' => 'Date d\'arrivée',
                 'required' => true,
                 'placeholder' => [
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
@@ -39,6 +40,7 @@ class ReservationType extends AbstractType
             ->add('checkOut', DateType::class, [
                 'widget' => 'single_text',
                 'by_reference' => true,
+                'label' => 'Date de départ',
                 'mapped' => true,
                 'required' => true,
                 'placeholder' => [

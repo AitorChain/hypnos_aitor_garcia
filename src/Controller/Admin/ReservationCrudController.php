@@ -42,6 +42,7 @@ class ReservationCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->showEntityActionsInlined()
             ->setEntityLabelInPlural('Reservations')
             ->setEntityLabelInSingular('Reservation');
     }
@@ -49,7 +50,7 @@ class ReservationCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-            // ...
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->setPermission(Action::NEW, 'ROLE_ADMIN')
             ->setPermission(Action::EDIT, 'ROLE_GERANT')
             ;

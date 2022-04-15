@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <title>{% block title %}Hypnos{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -53,28 +53,28 @@
                 </li>
 
             <li class="nav-item">
-                <a href="{{ path('app_contact') }}">Nous contacter</a>
+                <a class="nav-link" href="{{ path('app_contact') }}">Nous contacter</a>
             </li>
             {% if app.user %}
                 <li class="nav-item">
-                    <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                 </li>
             {% endif %}
             {% if is_granted('ROLE_CLIENT') %}
                 <li class="nav-item">
-                    <a href="{{ path('profile') }}">Espace client</a>
+                    <a class="nav-link" href="{{ path('profile') }}">Espace client</a>
                 </li>
             {% elseif is_granted('ROLE_GERANT') %}
                 <li class="nav-item">
-                    <a href="{{ path('gerance') }}">Gérance</a>
+                    <a class="nav-link" href="{{ path('gerance') }}">Gérance</a>
                 </li>
             {% elseif is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
-                    <a href="{{ path('admin') }}">Administration</a>
+                    <a class="nav-link" href="{{ path('admin') }}">Administration</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a href="{{ path('app_login') }}">Se connecter</a>
+                    <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
                 </li>
             {% endif %}
             <a href="{{ path('app_reservation_new')}}">
@@ -102,9 +102,14 @@
         {% else %}
             <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link px-2">Se connecter</a></li>
         {% endif %}
+        {% if app.user %}
+            <li class="nav-item">
+                <a href="{{ path('app_logout') }}" class="nav-link px-2">Se déconnecter</a>
+            </li>
+        {% endif %}
         <li class="nav-item"><a href="{{ path('app_reservation_new')}}" class="nav-link px-2">Reserver</a></li>
     </ul>
-    <p class="text-center text-muted">&copy; 2021 Company, Inc</p>
+    <p class="text-center" style="color: #ab8442"><strong>&copy; Aitor García - Studi ECF</strong></p>
 </footer>
 
 </body>

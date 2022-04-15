@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Reservation;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -36,12 +37,18 @@ class ClientDashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ecf Hotel');
+            ->setTitle('<img style="width: 100%" src="/assets/images/hypnos-logo.png">');
+    }
+
+    public function configureAssets(): Assets
+    {
+        return parent::configureAssets()
+            ->addWebpackEncoreEntry('admin');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToRoute('Retourner au site', 'fa fa-reply', 'app_homepage');
         yield MenuItem::linkToCrud('Reservations', 'fas fa-key', Reservation::class);
 
     }

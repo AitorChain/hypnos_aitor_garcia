@@ -6,6 +6,7 @@ use App\Entity\Etablissement;
 use App\Entity\Reservation;
 use App\Entity\Suite;
 use App\Entity\Utilisateur;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -38,11 +39,18 @@ class GerantDashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ecf Hotel');
+            ->setTitle('<img style="width: 100%" src="/assets/images/hypnos-logo.png">');
+    }
+
+    public function configureAssets(): Assets
+    {
+        return parent::configureAssets()
+            ->addWebpackEncoreEntry('admin');
     }
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToRoute('Retourner au site', 'fa fa-reply', 'app_homepage');
         yield MenuItem::linkToCrud('Hôtels', 'fas fa-hotel', Etablissement::class);
         yield MenuItem::subMenu('Suites', 'fas fa-bed')->setSubItems([
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Suite::class)
