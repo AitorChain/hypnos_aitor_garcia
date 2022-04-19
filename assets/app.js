@@ -161,13 +161,15 @@ $(document).on('change', '#reservation_suite, #reservation_checkIn, #reservation
                         .addClass('is-valid')
                     $("#availability_info")
                         .html(`<strong class="green">La suite est disponible.</strong> Le prix de votre sejour est de <strong> ${euroFR.format(prix_sejour)}</strong>`)
-                    $("#alert-modal-body")
-                        .html(`<p>Voulez allez reserver la suite <strong>${suiteText}</strong> de l\'hôtel <strong>${hotelText}</strong> pour le suivants dates:</p>
+                    setTimeout(function () {
+                        $("#alert-modal-body")
+                            .html(`<p>Voulez allez reserver la suite <strong>${suiteText}</strong> de l\'hôtel <strong>${hotelText}</strong> pour le suivants dates:</p>
                         <ul>
                             <li>Date d'arrivée: <strong>${formatDate.format(Date.parse(checkIn))}</strong></li>
                             <li>Date de depart: <strong>${formatDate.format(Date.parse(checkOut))}</strong></li>
                         </ul>
                         <p>La tarif de votre sejour est de <strong>${euroFR.format(prix_sejour)}</strong>. Vous réglerez a la reception de l'hôtel lors de votre arrivée</p>`)
+                    }, 2000)
                 }
             }
         })

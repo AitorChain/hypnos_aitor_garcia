@@ -726,6 +726,7 @@ a:hover {
   .card-container {
     padding-right: 4em;
     padding-left: 4em;
+    padding-bottom: 3em;
   }
 
   .homepage-banner .banner-text h1 {
@@ -804,6 +805,13 @@ a:hover {
   .connect-info,
   #availability_info {
     font-size: 2em;
+  }
+
+  .price-box {
+    width: 35%;
+  }
+  .price-text {
+    font-size: 2.3em;
   }
 
 
