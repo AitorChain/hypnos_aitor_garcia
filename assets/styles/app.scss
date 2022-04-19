@@ -815,5 +815,15 @@ a:hover {
     font-size: 2.3em;
   }
 
+  .form-check .form-check-input {
+    float: left;
+    margin-left: -0.5em;
+  }
+
+  .form-check-input,
+  .form-check-label {
+    font-size: 2em;
+    margin-left: 1em;
+  }
 
 }
