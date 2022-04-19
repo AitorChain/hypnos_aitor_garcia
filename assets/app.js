@@ -22,12 +22,12 @@ $(window).scroll(function(){
     let st = $(this).scrollTop();
     setTimeout(function(){
         if (st > lastScrollTop){
-            $('header').css('transform', 'translateY(-7em)')
+            $('header').css({'transform': 'translateY(-50em)', 'transition': 'transform 0.7s ease-in'})
         } else {
-            $('header').css('transform', 'translateY(0)')
+            $('header').css({'transform': 'translateY(0)', 'transition': 'transform 0.4s ease-out'})
         }
         lastScrollTop = st;
-    }, 300);
+    }, 200);
 });
 
 //Here I set two format functions to currency and date

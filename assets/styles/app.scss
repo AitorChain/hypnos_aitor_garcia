@@ -10,7 +10,6 @@ header {
   background-color: rgb(255, 255, 255);
   height:auto;
   box-shadow: 0 3px 10px #0000004a;
-  transition: transform 0.5s;
 }
 
 .fixed-top {
@@ -243,7 +242,7 @@ a:hover {
   font-size: 3.8em;
   color: #fff;
   font-weight: 600;
-  padding-top: 2.8em;
+  padding-top: 2em;
 }
 
 .banner-text h4 {
@@ -421,6 +420,7 @@ a:hover {
 .list-suites {
   margin-top: 2.5em;
   scroll-margin-top: 75px;
+  margin-bottom: 5em;
 }
 
 .list-suites h2 {
@@ -701,4 +701,110 @@ a:hover {
   height: 1vh;
   padding: 2vh;
   background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/2vh auto no-repeat;
+}
+
+@media (max-width: 992px) {
+  .logo {
+    max-width: 20em;
+  }
+  .navbar-toggler svg {
+    width: 4em;
+    height: 5em;
+  }
+  .navbar li a,
+  .btn-nav
+  {
+    font-size: 2.5em;
+  }
+
+  .carrousel-hotels,
+  .carrousel-suites, {
+    padding-right: 2em;
+    padding-left: 2em;
+  }
+
+  .card-container {
+    padding-right: 4em;
+    padding-left: 4em;
+  }
+
+  .homepage-banner .banner-text h1 {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .homepage-banner .banner-text h1,
+  .banner-text h1 {
+    font-size: 5.5em;
+  }
+
+  .banner-text h4 {
+    font-size: 2.5em;
+  }
+
+  .homepage-banner .banner-button, .hotel-banner .banner-button {
+    padding-top: 10em;
+    padding-bottom: 10em;
+  }
+
+  .card-title {
+    font-size: 3em;
+  }
+
+  .card-subtitle {
+    font-size: 1.7em;
+  }
+
+  .card-content,
+  .list-suites .card-content{
+    font-size: 2em;
+  }
+
+  .card-body .btn-secondary,
+  .card-body .btn-primary {
+    font-size: 2em;
+  }
+
+  .btn-call-action {
+    font-size: 2.7em;
+  }
+
+  footer {
+    font-size: 2em;
+  }
+
+  .hotel-description {
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    font-size: 2.2em;
+  }
+
+  .form-titre {
+    font-size: 5em;
+  }
+
+  .form-label {
+    font-size: 2.25em;
+  }
+
+  .form-control {
+    font-size: 2.3em;
+  }
+
+  .form-select {
+    font-size: 2.3em;
+  }
+
+  .form-buttons .btn-primary,
+  .form-buttons .btn-secondary,
+  .contact-form-button {
+    font-size: 2em;
+  }
+
+  .connect-info,
+  #availability_info {
+    font-size: 2em;
+  }
+
+
 }

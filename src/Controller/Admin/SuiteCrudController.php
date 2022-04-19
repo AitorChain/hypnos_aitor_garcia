@@ -35,6 +35,9 @@ class SuiteCrudController extends AbstractCrudController
             });
         yield TextField::new('titre')
             ->setLabel('Nom de la suite');
+        yield MoneyField::new('prix')
+            ->setCurrency('EUR')
+            ->setStoredAsCents();
         yield TextareaField::new('description')
             ->hideOnIndex();
         yield TextField::new('lien_booking')
@@ -49,9 +52,6 @@ class SuiteCrudController extends AbstractCrudController
             ->setEntryType(GallerieType::class)
             ->setFormTypeOption('by_reference', false)
             ->onlyOnForms();
-        yield MoneyField::new('prix')
-            ->setCurrency('EUR')
-            ->setStoredAsCents();
     }
 
     public function configureActions(Actions $actions): Actions

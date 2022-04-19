@@ -6,7 +6,7 @@
 
     <div class="container-fluid banner homepage-banner">
 
-        <section class="container">
+        <section class="container-xl">
             <div class="row row-cols-xl-2">
                 <div class="banner-text col-xl-8 text-align-left">
                     <h1>Decouvrez nos hôtels, profitez des vacances excepticionnelles.</h1>
@@ -47,7 +47,10 @@
                 </div>
 
                 <div class="banner-button col text-center">
-                    <a class="btn-primary btn-call-action" href="{{ path('app_hotel_index') }}">Decouvrir nos etablissements</a>
+                    <a class="" href="{{ path('app_hotel_index') }}">
+                        <button class="btn-primary btn-call-action">
+                            Decouvrir nos etablissements
+                        </button></a>
                 </div>
                 {% endif %}
             </div>

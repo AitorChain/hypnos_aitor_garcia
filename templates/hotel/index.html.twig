@@ -8,7 +8,7 @@
             {% if etablissement.photoFilename %}
          style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.77)), url({{ asset('uploads/images/' ~ etablissement.photoFilename) }})"
             {% endif %}>
-        <section class="container">
+        <section class="container-xl">
             <div class="row">
                 <div class="col-12 banner-text text-center">
                     <h1>{{etablissement}}</h1>
@@ -62,7 +62,11 @@
             </div>
             {% if suites %}
             <div class="banner-button col text-center">
-                <a class="btn-primary btn-call-action" href="#list-suites">Decouvrir les suites</a>
+                <a href="#list-suites">
+                    <button class="btn-primary btn-call-action">
+                        Decouvrir les suites
+                    </button>
+                </a>
             </div>
             {% else %}
                 <h4 class="non-suites">Cet hôtel n'a pas des suites disponibles</h4>
