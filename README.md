@@ -11,6 +11,14 @@ Sur le fichier Annexes vous trouverez:
 - Charte graphique
 - Documentation technique
 
+## Tester l'application
+
+Vous pouvez tester l'application ici https://hypnos-aitor-garcia.herokuapp.com/
+
+Vous trouverez les comptes de test sur la derniere page du manuel d'utilisation.
+
+Pour quoi on voit pas le photos? https://help.heroku.com/K1PPS2WM/why-are-my-file-uploads-missing-deleted-from-the-application
+
 
 ## Requirements
 
